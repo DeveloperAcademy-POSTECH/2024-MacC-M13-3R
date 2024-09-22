@@ -9,8 +9,13 @@
 -
 <br></br>
 
+## 🧚🏻‍♀️ Demo
+<br></br>
 
-## 👩‍👩‍👧‍👧 Team
+## :sparkles: Skills & Tech Stack
+- swiftUI
+
+## 👩‍👩‍👧‍👧 Authors
 <table>
   <tbody>
     <tr>
@@ -31,15 +36,5 @@
   </tbody>
 </table>
 <br></br>
-
-## 🧚🏻‍♀️ Demo
-<br></br>
-
-## :sparkles: Skills & Tech Stack
-- swiftUI
-
-<br></br>
-## :books: Documentation
-
 
 
