@@ -33,6 +33,11 @@
       <td colspan="1" align="center"><b>❄️</b></td>
       <td colspan="1" align="center"><b>⭐️</b></td>
     </tr>
+     <tr>
+      <td colspan="1" align="center"><b>@SSSiye</b></td>
+      <td colspan="1" align="center"><b>@Winterrr-24</b></td>
+      <td colspan="1" align="center"><b>@izzy0426</b></td>
+    </tr>
   </tbody>
 </table>
 <br></br>
