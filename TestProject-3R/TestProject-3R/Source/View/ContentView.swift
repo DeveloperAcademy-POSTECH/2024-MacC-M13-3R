@@ -11,15 +11,11 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             VStack {
-                Button{
-                    NavigationLink(destination:SttView())
-                } label: {
+                NavigationLink(destination:SttView()) {
                     Text("SttView")
                 }
                 
-                Button{
-                    NavigationLink(destination: GptView())
-                } label: {
+                NavigationLink(destination: GptView()) {
                     Text("GptView")
                 }
             }
