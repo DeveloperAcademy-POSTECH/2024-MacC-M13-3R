@@ -11,6 +11,12 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             VStack {
+                NavigationLink(destination:SttView()){
+                    Text("SttView")}
+                
+                NavigationLink(destination: GptView()){
+                    Text("GptView")}
+            
                 NavigationLink(destination:SttView()) {
                     Text("SttView")
                 }
