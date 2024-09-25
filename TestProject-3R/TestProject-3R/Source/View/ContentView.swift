@@ -17,6 +17,13 @@ struct ContentView: View {
                 NavigationLink(destination: GptView()){
                     Text("GptView")}
             
+                NavigationLink(destination:SttView()) {
+                    Text("SttView")
+                }
+                
+                NavigationLink(destination: GptView()) {
+                    Text("GptView")
+                }
             }
             .padding()
         }
