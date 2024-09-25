@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71362BC22CA332CA00A3630B /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71362BC12CA332CA00A3630B /* SpeechRecognizer.swift */; };
 		71D966BA2CA26C1700D971C6 /* TestProject_3RApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D966B92CA26C1700D971C6 /* TestProject_3RApp.swift */; };
 		71D966BC2CA26C1700D971C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D966BB2CA26C1700D971C6 /* ContentView.swift */; };
 		71D966BE2CA26C1800D971C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71D966BD2CA26C1800D971C6 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		71362BC12CA332CA00A3630B /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SpeechRecognizer.swift; path = "../../../../../../.Trash/2024-MacC-M13-3R/TestProject-3R/TestProject-3R/Source/ViewModel/SpeechRecognizer.swift"; sourceTree = "<group>"; };
 		71D966B62CA26C1700D971C6 /* TestProject-3R.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TestProject-3R.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71D966B92CA26C1700D971C6 /* TestProject_3RApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProject_3RApp.swift; sourceTree = "<group>"; };
 		71D966BB2CA26C1700D971C6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 		71D966C92CA26C3B00D971C6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				71362BC12CA332CA00A3630B /* SpeechRecognizer.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71362BC22CA332CA00A3630B /* SpeechRecognizer.swift in Sources */,
 				71D966BC2CA26C1700D971C6 /* ContentView.swift in Sources */,
 				71D966BA2CA26C1700D971C6 /* TestProject_3RApp.swift in Sources */,
 				71D966CE2CA26C6800D971C6 /* GptView.swift in Sources */,
@@ -315,6 +319,8 @@
 				DEVELOPMENT_TEAM = R83JF9K5WA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "$(MARKETING_VERSION)";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -344,6 +350,8 @@
 				DEVELOPMENT_TEAM = R83JF9K5WA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "$(MARKETING_VERSION)";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
