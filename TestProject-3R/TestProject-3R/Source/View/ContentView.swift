@@ -11,17 +11,12 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             VStack {
-                Button{
-                    NavigationLink(destination:SttView())
-                } label: {
-                    Text("SttView")
-                }
+                NavigationLink(destination:SttView()){
+                    Text("SttView")}
                 
-                Button{
-                    NavigationLink(destination: GptView())
-                } label: {
-                    Text("GptView")
-                }
+                NavigationLink(destination: GptView()){
+                    Text("GptView")}
+            
             }
             .padding()
         }
