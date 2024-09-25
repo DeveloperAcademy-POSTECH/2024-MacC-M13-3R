@@ -11,7 +11,7 @@
 		305F25EF2CA274F300D101A3 /* GPT in Frameworks */ = {isa = PBXBuildFile; productRef = 305F25EE2CA274F300D101A3 /* GPT */; };
 		305F25F12CA274F300D101A3 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 305F25F02CA274F300D101A3 /* OpenAI */; };
 		305F25F62CA398E300D101A3 /* ApiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F25F52CA398E300D101A3 /* ApiViewModel.swift */; };
-		71362BC22CA332CA00A3630B /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71362BC12CA332CA00A3630B /* SpeechRecognizer.swift */; };
+		7164D99D2CA3A8E800598405 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */; };
 		71D966BA2CA26C1700D971C6 /* TestProject_3RApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D966B92CA26C1700D971C6 /* TestProject_3RApp.swift */; };
 		71D966BC2CA26C1700D971C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D966BB2CA26C1700D971C6 /* ContentView.swift */; };
 		71D966BE2CA26C1800D971C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71D966BD2CA26C1800D971C6 /* Assets.xcassets */; };
@@ -24,7 +24,7 @@
 		305F25F32CA27FDC00D101A3 /* API_KEY.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = API_KEY.xcconfig; sourceTree = "<group>"; };
 		305F25F42CA38DC700D101A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		305F25F52CA398E300D101A3 /* ApiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApiViewModel.swift; path = "TestProject-3R/Source/ViewModel/ApiViewModel.swift"; sourceTree = SOURCE_ROOT; };
-		71362BC12CA332CA00A3630B /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SpeechRecognizer.swift; path = "../../../../../../.Trash/2024-MacC-M13-3R/TestProject-3R/TestProject-3R/Source/ViewModel/SpeechRecognizer.swift"; sourceTree = "<group>"; };
+		7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		71D966B62CA26C1700D971C6 /* TestProject-3R.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TestProject-3R.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71D966B92CA26C1700D971C6 /* TestProject_3RApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProject_3RApp.swift; sourceTree = "<group>"; };
 		71D966BB2CA26C1700D971C6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				305F25F52CA398E300D101A3 /* ApiViewModel.swift */,
-				71362BC12CA332CA00A3630B /* SpeechRecognizer.swift */,
+				7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -199,12 +199,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71362BC22CA332CA00A3630B /* SpeechRecognizer.swift in Sources */,
 				71D966BC2CA26C1700D971C6 /* ContentView.swift in Sources */,
 				71D966BA2CA26C1700D971C6 /* TestProject_3RApp.swift in Sources */,
 				71D966CE2CA26C6800D971C6 /* GptView.swift in Sources */,
 				71D966CC2CA26C5F00D971C6 /* SttView.swift in Sources */,
 				305F25F62CA398E300D101A3 /* ApiViewModel.swift in Sources */,
+				7164D99D2CA3A8E800598405 /* SpeechRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,14 +339,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestProject-3R/Preview Content\"";
-				DEVELOPMENT_TEAM = 7P4U6S44RJ;
+				DEVELOPMENT_TEAM = R83JF9K5WA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "TestProject-3R/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = 1.0;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -357,7 +357,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.winter.gptAPI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sisi.TestProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -374,14 +374,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestProject-3R/Preview Content\"";
-				DEVELOPMENT_TEAM = 7P4U6S44RJ;
+				DEVELOPMENT_TEAM = R83JF9K5WA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "TestProject-3R/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = 1.0;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -392,7 +392,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.winter.gptAPI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sisi.TestProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -12,18 +12,15 @@ struct ContentView: View {
         NavigationView{
             VStack {
                 NavigationLink(destination:SttView()){
-                    Text("SttView")}
+                    Text("SttView")
+                        .font(.title)
+                }.padding()
                 
                 NavigationLink(destination: GptView()){
-                    Text("GptView")}
-            
-                NavigationLink(destination:SttView()) {
-                    Text("SttView")
-                }
+                    Text("GptView") 
+                        .font(.title)
+                }.padding()
                 
-                NavigationLink(destination: GptView()) {
-                    Text("GptView")
-                }
             }
             .padding()
         }
