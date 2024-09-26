@@ -11,12 +11,12 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             VStack {
-                NavigationLink(destination:SttView()){
+                NavigationLink(destination:SttView(speechRecognizer: SpeechRecognizer())){
                     Text("SttView")
                         .font(.title)
                 }.padding()
                 
-                NavigationLink(destination: GptView()){
+                NavigationLink(destination: GptView(speechRecognizer: SpeechRecognizer())){
                     Text("GptView") 
                         .font(.title)
                 }.padding()

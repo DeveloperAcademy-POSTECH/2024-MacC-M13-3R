@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct SttView: View {
-    @StateObject private var speechRecognizer = SpeechRecognizer()
-    @State var isTextButton = false
+//    @StateObject private var speechRecognizer = SpeechRecognizer()
+    @ObservedObject var speechRecognizer: SpeechRecognizer
+       
     var body: some View {
         VStack {
             Text("Speech To Text")
@@ -11,13 +12,9 @@ struct SttView: View {
             
             TextEditor(text: $speechRecognizer.transcript)
             
-            if isTextButton {
-                Text(speechRecognizer.sttText)
-            }
             HStack {
                 Button(action: {
                     speechRecognizer.startTranscribing()
-                    isTextButton = false
                 }) {
                     Text("Start")
                         .padding()
@@ -28,7 +25,6 @@ struct SttView: View {
                 
                 Button(action: {
                     speechRecognizer.stopTranscribing()
-                    isTextButton = true
                     print(speechRecognizer.sttText)
                     
                 }) {
@@ -46,5 +42,5 @@ struct SttView: View {
     }
 }
 #Preview {
-    SttView()
+    SttView(speechRecognizer: SpeechRecognizer())
 }
