@@ -13,7 +13,7 @@ class SpeechRecognizer: NSObject, ObservableObject, SFSpeechRecognizerDelegate {
     
     @Published var transcript = ""      // 텍스트로 변환된 string 변수 -> Published여서 view에서 감지하고 업데이트 가능
     private var isTranscribing = false      // 음성인식 중인지 여부 파악
-    @Published var sttText = ""
+    @Published var sttText = "무러바"
     
     override init() {       // 상위 클래스의 init 메소드를 재정의, 하위 클래스의 init 동작 바꾸기
         super.init()        // 상위 클래스의 초기화 작업 무시하지 않고 추가 작업
