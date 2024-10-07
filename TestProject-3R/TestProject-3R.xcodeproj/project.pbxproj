@@ -10,6 +10,7 @@
 		305F25ED2CA274F300D101A3 /* ChatGPT in Frameworks */ = {isa = PBXBuildFile; productRef = 305F25EC2CA274F300D101A3 /* ChatGPT */; };
 		305F25EF2CA274F300D101A3 /* GPT in Frameworks */ = {isa = PBXBuildFile; productRef = 305F25EE2CA274F300D101A3 /* GPT */; };
 		305F25F12CA274F300D101A3 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 305F25F02CA274F300D101A3 /* OpenAI */; };
+		305F26002CB363E500D101A3 /* UpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F25FF2CB363E500D101A3 /* UpdateView.swift */; };
 		715DCCD82CAFD87A00E899A5 /* UserDefaultsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715DCCD72CAFD87A00E899A5 /* UserDefaultsTestView.swift */; };
 		7164D99D2CA3A8E800598405 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */; };
 		71C133722CAFF31E003DCCCF /* UserDefaultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C133712CAFF31E003DCCCF /* UserDefaultsModel.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		305F25F32CA27FDC00D101A3 /* API_KEY.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = API_KEY.xcconfig; sourceTree = "<group>"; };
 		305F25F42CA38DC700D101A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		305F25FF2CB363E500D101A3 /* UpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateView.swift; sourceTree = "<group>"; };
 		715DCCD72CAFD87A00E899A5 /* UserDefaultsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTestView.swift; sourceTree = "<group>"; };
 		7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		71C133712CAFF31E003DCCCF /* UserDefaultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsModel.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				71D966CB2CA26C5F00D971C6 /* SttView.swift */,
 				71D966CD2CA26C6800D971C6 /* GptView.swift */,
 				715DCCD72CAFD87A00E899A5 /* UserDefaultsTestView.swift */,
+				305F25FF2CB363E500D101A3 /* UpdateView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71C133722CAFF31E003DCCCF /* UserDefaultsModel.swift in Sources */,
+				305F26002CB363E500D101A3 /* UpdateView.swift in Sources */,
 				71D966BC2CA26C1700D971C6 /* ContentView.swift in Sources */,
 				71D966BA2CA26C1700D971C6 /* TestProject_3RApp.swift in Sources */,
 				71D966CE2CA26C6800D971C6 /* GptView.swift in Sources */,
