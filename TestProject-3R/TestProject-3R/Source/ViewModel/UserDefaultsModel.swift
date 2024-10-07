@@ -3,8 +3,8 @@ import Foundation
 struct ShoppingItem: Codable {
     var name: String
     var quantity: Int
-    var price: Double
-    var unitPrice: Double
+    var price: Double //수량*단가
+    var unitPrice: Double //단가
 }
 
 
@@ -20,14 +20,14 @@ class ShoppingUserDefaultsViewModel:ObservableObject {
         loadShoppingListFromUserDefaults()
     }
     
-    // 데이터를 인코딩하고 UserDefaults에 저장
+    // MARK: 데이터를 인코딩하고 UserDefaults에 저장
     func saveShppingListToUserDefaults() {
         if let encoded = try? JSONEncoder().encode(shoppingList) {
             UserDefaults.standard.set(encoded, forKey: "shoppingList")
         }
     }
     
-    // UserDefaults에서 데이터를 불러오기
+    // MARK: UserDefaults에서 데이터를 불러오기
     func loadShoppingListFromUserDefaults() {
         if let savedData = UserDefaults.standard.data(forKey: "shoppingList") {
             if let savedList = try? JSONDecoder().decode([ShoppingItem].self, from: savedData) {
@@ -40,12 +40,26 @@ class ShoppingUserDefaultsViewModel:ObservableObject {
         }
     }
     
+    // MARK: 종류별 단가에 따라 가격 계산
     func pricing() {
         for index in shoppingList.indices {
             shoppingList[index].price = shoppingList[index].unitPrice * Double(shoppingList[index].quantity)
         }
         saveShppingListToUserDefaults()
         loadShoppingListFromUserDefaults()
+    }
+    
+    // MARK: 총 금액 계산
+    func totalPricing() -> Double {
+        var total = 0.0
+        
+        for index in shoppingList.indices {
+           total += shoppingList[index].price
+        }
+//        saveShppingListToUserDefaults()
+//        loadShoppingListFromUserDefaults()
+        
+        return total
     }
 
 }
