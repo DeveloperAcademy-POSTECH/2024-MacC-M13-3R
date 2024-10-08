@@ -12,8 +12,8 @@ struct TestProject_3RApp: App {
     var body: some Scene {
         WindowGroup {
 //            ContentView()
-            UserDefaultsTestView()
-//            UpdateView(speechRecognizer: SpeechRecognizer())
+//            UserDefaultsTestView()
+            UpdateView(speechRecognizer: SpeechRecognizer())
         }
     }
 }
