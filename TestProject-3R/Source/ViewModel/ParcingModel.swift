@@ -1,13 +1,9 @@
 import Foundation
 
 // CSV 파일을 로드하여 파싱하는 함수
-func loadLocationsFromCSV(completion: @escaping ([[String]]) -> Void) {
-    if let path = Bundle.main.path(forResource: "MyCart", ofType: "csv") {
-        parseCSVAt(url: URL(fileURLWithPath: path), completion: completion)
-    }
+func loadListFromCSV(at filePath: URL, completion: @escaping ([[String]]) -> Void) {
+    parseCSVAt(url: filePath, completion: completion)
 }
-
-
 func parseCSVAt(url: URL, completion: @escaping ([[String]]) -> Void) {
     do {
         let data = try Data(contentsOf: url)

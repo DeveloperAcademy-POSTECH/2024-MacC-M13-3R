@@ -13,6 +13,9 @@
 		305F26002CB363E500D101A3 /* UpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F25FF2CB363E500D101A3 /* UpdateView.swift */; };
 		715DCCD82CAFD87A00E899A5 /* UserDefaultsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715DCCD72CAFD87A00E899A5 /* UserDefaultsTestView.swift */; };
 		7164D99D2CA3A8E800598405 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */; };
+		7168CC762CB57EFC00A01E28 /* ParcingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7168CC752CB57EFC00A01E28 /* ParcingModel.swift */; };
+		7168CC782CB5818100A01E28 /* MyCart.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7168CC772CB5818100A01E28 /* MyCart.csv */; };
+		7168CC7A2CB59ED100A01E28 /* ParcingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7168CC792CB59ED100A01E28 /* ParcingView.swift */; };
 		71C133722CAFF31E003DCCCF /* UserDefaultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C133712CAFF31E003DCCCF /* UserDefaultsModel.swift */; };
 		71D966BA2CA26C1700D971C6 /* TestProject_3RApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D966B92CA26C1700D971C6 /* TestProject_3RApp.swift */; };
 		71D966BC2CA26C1700D971C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D966BB2CA26C1700D971C6 /* ContentView.swift */; };
@@ -25,9 +28,12 @@
 /* Begin PBXFileReference section */
 		305F25F42CA38DC700D101A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		305F25FF2CB363E500D101A3 /* UpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateView.swift; sourceTree = "<group>"; };
-		305F26012CB4DE8800D101A3 /* API_KEY.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = API_KEY.xcconfig; sourceTree = "<group>"; };
 		715DCCD72CAFD87A00E899A5 /* UserDefaultsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTestView.swift; sourceTree = "<group>"; };
 		7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
+		7168CC742CB56EF800A01E28 /* API_KEY.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = API_KEY.xcconfig; sourceTree = "<group>"; };
+		7168CC752CB57EFC00A01E28 /* ParcingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcingModel.swift; sourceTree = "<group>"; };
+		7168CC772CB5818100A01E28 /* MyCart.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyCart.csv; sourceTree = "<group>"; };
+		7168CC792CB59ED100A01E28 /* ParcingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcingView.swift; sourceTree = "<group>"; };
 		71C133712CAFF31E003DCCCF /* UserDefaultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsModel.swift; sourceTree = "<group>"; };
 		71D966B62CA26C1700D971C6 /* TestProject-3R.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TestProject-3R.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71D966B92CA26C1700D971C6 /* TestProject_3RApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProject_3RApp.swift; sourceTree = "<group>"; };
@@ -52,10 +58,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7168CC7B2CB5BBAB00A01E28 /* Ubea */ = {
+			isa = PBXGroup;
+			children = (
+				7168CC792CB59ED100A01E28 /* ParcingView.swift */,
+				71D966CD2CA26C6800D971C6 /* GptView.swift */,
+				71D966CB2CA26C5F00D971C6 /* SttView.swift */,
+			);
+			path = Ubea;
+			sourceTree = "<group>";
+		};
 		71D966AD2CA26C1700D971C6 = {
 			isa = PBXGroup;
 			children = (
-				305F26012CB4DE8800D101A3 /* API_KEY.xcconfig */,
+				7168CC742CB56EF800A01E28 /* API_KEY.xcconfig */,
 				71D966B82CA26C1700D971C6 /* TestProject-3R */,
 				71D966B72CA26C1700D971C6 /* Products */,
 			);
@@ -75,6 +91,7 @@
 				305F25F42CA38DC700D101A3 /* Info.plist */,
 				71D966CA2CA26C3B00D971C6 /* Source */,
 				71D966BD2CA26C1800D971C6 /* Assets.xcassets */,
+				7168CC7B2CB5BBAB00A01E28 /* Ubea */,
 				71D966BF2CA26C1800D971C6 /* Preview Content */,
 			);
 			path = "TestProject-3R";
@@ -100,8 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				71D966BB2CA26C1700D971C6 /* ContentView.swift */,
-				71D966CB2CA26C5F00D971C6 /* SttView.swift */,
-				71D966CD2CA26C6800D971C6 /* GptView.swift */,
 				305F25FF2CB363E500D101A3 /* UpdateView.swift */,
 				715DCCD72CAFD87A00E899A5 /* UserDefaultsTestView.swift */,
 			);
@@ -113,6 +128,7 @@
 			children = (
 				7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */,
 				71C133712CAFF31E003DCCCF /* UserDefaultsModel.swift */,
+				7168CC752CB57EFC00A01E28 /* ParcingModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -120,6 +136,7 @@
 		71D966CA2CA26C3B00D971C6 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				7168CC772CB5818100A01E28 /* MyCart.csv */,
 				71D966C72CA26C3B00D971C6 /* App */,
 				71D966C82CA26C3B00D971C6 /* View */,
 				71D966C92CA26C3B00D971C6 /* ViewModel */,
@@ -194,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71D966C12CA26C1800D971C6 /* Preview Assets.xcassets in Resources */,
+				7168CC782CB5818100A01E28 /* MyCart.csv in Resources */,
 				71D966BE2CA26C1800D971C6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,8 +228,10 @@
 				71D966BC2CA26C1700D971C6 /* ContentView.swift in Sources */,
 				71D966BA2CA26C1700D971C6 /* TestProject_3RApp.swift in Sources */,
 				71D966CE2CA26C6800D971C6 /* GptView.swift in Sources */,
+				7168CC762CB57EFC00A01E28 /* ParcingModel.swift in Sources */,
 				715DCCD82CAFD87A00E899A5 /* UserDefaultsTestView.swift in Sources */,
 				71D966CC2CA26C5F00D971C6 /* SttView.swift in Sources */,
+				7168CC7A2CB59ED100A01E28 /* ParcingView.swift in Sources */,
 				7164D99D2CA3A8E800598405 /* SpeechRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,7 +241,7 @@
 /* Begin XCBuildConfiguration section */
 		71D966C22CA26C1800D971C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 305F26012CB4DE8800D101A3 /* API_KEY.xcconfig */;
+			baseConfigurationReference = 7168CC742CB56EF800A01E28 /* API_KEY.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -285,7 +305,7 @@
 		};
 		71D966C32CA26C1800D971C6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 305F26012CB4DE8800D101A3 /* API_KEY.xcconfig */;
+			baseConfigurationReference = 7168CC742CB56EF800A01E28 /* API_KEY.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -348,7 +368,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestProject-3R/Preview Content\"";
-				DEVELOPMENT_TEAM = 7P4U6S44RJ;
+				DEVELOPMENT_TEAM = R83JF9K5WA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "TestProject-3R/Info.plist";
@@ -382,7 +402,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestProject-3R/Preview Content\"";
-				DEVELOPMENT_TEAM = 7P4U6S44RJ;
+				DEVELOPMENT_TEAM = R83JF9K5WA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "TestProject-3R/Info.plist";
