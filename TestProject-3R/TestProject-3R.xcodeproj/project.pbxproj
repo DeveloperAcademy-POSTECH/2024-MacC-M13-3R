@@ -102,8 +102,8 @@
 				71D966BB2CA26C1700D971C6 /* ContentView.swift */,
 				71D966CB2CA26C5F00D971C6 /* SttView.swift */,
 				71D966CD2CA26C6800D971C6 /* GptView.swift */,
-				715DCCD72CAFD87A00E899A5 /* UserDefaultsTestView.swift */,
 				305F25FF2CB363E500D101A3 /* UpdateView.swift */,
+				715DCCD72CAFD87A00E899A5 /* UserDefaultsTestView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -13,6 +13,7 @@ struct TestProject_3RApp: App {
         WindowGroup {
 //            ContentView()
             UserDefaultsTestView()
+//            UpdateView(speechRecognizer: SpeechRecognizer())
         }
     }
 }
