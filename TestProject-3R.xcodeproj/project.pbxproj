@@ -23,9 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		305F25F32CA27FDC00D101A3 /* API_KEY.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = API_KEY.xcconfig; sourceTree = "<group>"; };
 		305F25F42CA38DC700D101A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		305F25FF2CB363E500D101A3 /* UpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateView.swift; sourceTree = "<group>"; };
+		305F26012CB4DE8800D101A3 /* API_KEY.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = API_KEY.xcconfig; sourceTree = "<group>"; };
 		715DCCD72CAFD87A00E899A5 /* UserDefaultsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTestView.swift; sourceTree = "<group>"; };
 		7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		71C133712CAFF31E003DCCCF /* UserDefaultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsModel.swift; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 		71D966AD2CA26C1700D971C6 = {
 			isa = PBXGroup;
 			children = (
-				305F25F32CA27FDC00D101A3 /* API_KEY.xcconfig */,
+				305F26012CB4DE8800D101A3 /* API_KEY.xcconfig */,
 				71D966B82CA26C1700D971C6 /* TestProject-3R */,
 				71D966B72CA26C1700D971C6 /* Products */,
 			);
@@ -221,6 +221,7 @@
 /* Begin XCBuildConfiguration section */
 		71D966C22CA26C1800D971C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 305F26012CB4DE8800D101A3 /* API_KEY.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -284,6 +285,7 @@
 		};
 		71D966C32CA26C1800D971C6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 305F26012CB4DE8800D101A3 /* API_KEY.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -340,7 +342,6 @@
 		};
 		71D966C52CA26C1800D971C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 305F25F32CA27FDC00D101A3 /* API_KEY.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -375,7 +376,6 @@
 		};
 		71D966C62CA26C1800D971C6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 305F25F32CA27FDC00D101A3 /* API_KEY.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
