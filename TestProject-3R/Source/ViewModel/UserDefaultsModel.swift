@@ -16,7 +16,7 @@ class ShoppingUserDefaultsViewModel:ObservableObject {
     @Published var shoppingLists: [ShoppingDateItem] = []
     @Published var shoppingItems: [ShoppingItem] = []
     
-    // 앱이 시작될 때 UserDefaults에서 데이터를 불러오기
+    // MARK: 앱이 시작될 때 UserDefaults에서 데이터를 불러오기
     init() {
         loadShoppingListFromUserDefaults()
         if shoppingItems.isEmpty {
