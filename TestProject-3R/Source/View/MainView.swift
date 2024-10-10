@@ -149,6 +149,7 @@ struct MainView: View {
             .background(Color(red: 0.96, green: 0.96, blue: 0.96))
             
         }
+        .tint(.green) 
     }
 }
 
