@@ -1,6 +1,6 @@
 import SwiftUI
 struct ContentView: View {
-    @StateObject private var speechRecognizer = SpeechRecognizer() // 상위 뷰에서 SpeechRecognizer 생성
+    @StateObject private var speechRecognizer = SpeechRecognizer()
         
     var body: some View {
         NavigationView{
@@ -15,20 +15,6 @@ struct ContentView: View {
                         .font(.title)
                 }.padding()
                 
-//                NavigationLink(destination: ParcingView()){
-//                    Text("ParcingView")
-//                        .font(.title)
-//                }.padding()
-                
-                //                NavigationLink(destination: SttView(speechRecognizer: speechRecognizer)){
-                //                    Text("SttView")
-                //                        .font(.title)
-                //                }.padding()
-                //
-                //                NavigationLink(destination: GptView(speechRecognizer: speechRecognizer)){
-                //                    Text("GptView")
-                //                        .font(.title)
-                //                }.padding()
                 
             }
             
