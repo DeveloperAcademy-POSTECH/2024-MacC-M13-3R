@@ -17,6 +17,9 @@
 ## :sparkles: Skills & Tech Stack
 - swiftUI
 
+  
+<br></br>
+
 ## 👩‍👩‍👧‍👧 Authors
 <table>
   <tbody>
