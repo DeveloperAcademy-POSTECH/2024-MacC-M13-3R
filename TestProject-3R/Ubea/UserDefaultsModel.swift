@@ -1,12 +1,5 @@
 import Foundation
 
-struct ShoppingItem: Codable {
-    var name: String
-    var quantity: Int
-    var price: Double //수량*단가
-    var unitPrice: Double //단가
-}
-
 struct ShoppingDateItem: Codable {
     var date: Date
     var items: [ShoppingItem]
@@ -21,9 +14,9 @@ class ShoppingUserDefaultsViewModel:ObservableObject {
         loadShoppingListFromUserDefaults()
         if shoppingItems.isEmpty {
             shoppingItems = [
-                ShoppingItem(name: "Apples", quantity: 1, price: 1500, unitPrice: 1500),
-                ShoppingItem(name: "Bananas", quantity: 1, price: 2000, unitPrice: 2000),
-                ShoppingItem(name: "Milk", quantity: 1, price: 3500, unitPrice: 3500)
+                ShoppingItem(name: "Apples", quantity: 1, unitPrice: 1500, price: 1500),
+                ShoppingItem(name: "Bananas", quantity: 1, unitPrice: 2000, price: 2000),
+                ShoppingItem(name: "Milk", quantity: 1, unitPrice: 3500, price: 3500)
             ]
             saveShoppingListToUserDefaults()
         }
@@ -55,13 +48,13 @@ class ShoppingUserDefaultsViewModel:ObservableObject {
     // MARK: 데이터를 인코딩하고 UserDefaults에 저장
     func saveShoppingListToUserDefaults() {
         if let encoded = try? JSONEncoder().encode(shoppingLists) {
-            UserDefaults.standard.set(encoded, forKey: "shoppingLists")
+            UserDefaults.standard.set(encoded, forKey: "testKEY")
         }
     }
     
     // MARK: UserDefaults에서 데이터를 불러오기
     func loadShoppingListFromUserDefaults() {
-        if let savedData = UserDefaults.standard.data(forKey: "shoppingLists") {
+        if let savedData = UserDefaults.standard.data(forKey: "testKEY") {
             if let saveLists = try? JSONDecoder().decode([ShoppingDateItem].self, from: savedData){
                 shoppingLists = saveLists
                 for item in shoppingItems {
@@ -74,15 +67,15 @@ class ShoppingUserDefaultsViewModel:ObservableObject {
     // MARK: 종류별 단가에 따라 가격 계산
     func pricing() {
         for index in shoppingItems.indices {
-            shoppingItems[index].price = shoppingItems[index].unitPrice * Double(shoppingItems[index].quantity)
+            shoppingItems[index].price = shoppingItems[index].unitPrice * shoppingItems[index].quantity
         }
         saveShoppingListToUserDefaults()
         loadShoppingListFromUserDefaults()
     }
     
     // MARK: 총 금액 계산
-    func totalPricing() -> Double {
-        var total = 0.0
+    func totalPricing() -> Int {
+        var total = 0
         
         for index in shoppingItems.indices {
            total += shoppingItems[index].price
