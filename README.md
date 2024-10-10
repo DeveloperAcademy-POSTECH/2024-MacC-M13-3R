@@ -14,9 +14,6 @@
   
 <br></br>
 
-## 🧚🏻‍♀️ Demo
-<br></br>
-
 ## :sparkles: Skills & Tech Stack
 - swiftUI
 
