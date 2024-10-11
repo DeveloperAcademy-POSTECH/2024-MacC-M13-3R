@@ -82,6 +82,7 @@ struct BudgetView: View {
             .navigationTitle("장보기 준비하기")
             .navigationBarTitleDisplayMode(.inline)
         }
+        .tint(.green)
     }
 }
 
