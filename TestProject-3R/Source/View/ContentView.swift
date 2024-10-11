@@ -5,10 +5,6 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             VStack{
-                NavigationLink(destination: UserDefaultsTestView()){
-                    Text("UserDefaultsTestView")
-                        .font(.title)
-                }.padding()
                 
                 NavigationLink(destination: UpdateView(speechRecognizer: SpeechRecognizer())){
                     Text("UpdateView")
