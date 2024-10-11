@@ -9,7 +9,29 @@ import SwiftUI
 
 struct CartView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+                .navigationTitle("장바구니")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            print("수정중")
+                        }) {
+                            Text("수정하기")
+                                .foregroundColor(.green)
+                        }
+                }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            MainView()
+                        }) {
+                            Text("종료")
+                                .foregroundColor(.green)
+                        }
+                }
+            }
+        }
     }
 }
 
