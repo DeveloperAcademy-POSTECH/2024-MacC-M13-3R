@@ -65,7 +65,7 @@ struct BudgetView: View {
                 .padding(.bottom, 20)
                 Image("sample_map")
                 Spacer()
-                NavigationLink(destination: CartView()) {
+                NavigationLink(destination: CartView(size: CGSize(width: 300, height: 20))) {
                     Text("장보기 시작하기")
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
