@@ -15,7 +15,7 @@ extension Font {
     static let RBody: Font = .custom("SpoqaHanSansNeo-Regular", size: 16)
     static let RCallout: Font = .custom("SpoqaHanSansNeo-Medium", size: 16)
     static let RCaption1: Font = .custom("SpoqaHanSansNeo-Medium", size: 10)
-    static let RBCaption2: Font = .custom("SpoqaHanSansNeo-Regular", size: 10)
+    static let RCaption2: Font = .custom("SpoqaHanSansNeo-Regular", size: 10)
     static let RMain: Font = .custom("SpoqaHanSansNeo-Bold", size: 36)
     
 }
