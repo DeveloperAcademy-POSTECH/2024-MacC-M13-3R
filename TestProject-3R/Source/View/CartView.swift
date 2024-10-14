@@ -3,13 +3,20 @@ import SwiftUI
 struct CartView: View {
     @StateObject private var shoppingViewModel = ShoppingViewModel()
     
+    @State private var isEdit: Bool = false  //수정버튼
+    @State private var place: String = "이마트 포항이동점"
+    
+    @State private var budget: Int = 50000  //초기 예산
+    @State private var remaining: Int = 0   //남은돈
+    @State private var price: Int = 0       //현재까지 담은 가격
+    
     @State private var percent: CGFloat = 0.4 //프로그래스바 퍼센트
-    @State private var price: Int = 0 //현재까지 담은 가격
     @State private var percentText: String = "이제 아껴볼까요?"
     @State private var percentColor: Color = Color.rYellow
-    @State private var remaining: Int = 0//남은돈
-    @State private var fullMoney: Int = 50000//초기 예산
-    @State private var place: String = "이마트 포항이동점"
+    
+    @State private var isSort: Bool = false    //정렬버튼
+    @State private var isRefresh: Bool = false //새로고침버튼
+    @State private var isRecoding: Bool = true //음성인식버튼
     
     let size: CGSize
     let fullWidth: CGFloat
@@ -55,62 +62,58 @@ struct CartView: View {
                 }.padding(.top, 13)
                 
                 HStack(spacing: 0){
-                    Button{
-                        
-                    } label: {
-                        HStack(spacing: 3){
-                            Text("정렬")
-                            Image(systemName: "chevron.down")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 12)
-                        }
+                    Spacer()
+                    Text("\(budget)")
                         .font(.RCaption1)
-                    }
-                    Button{
-                        
-                    } label: {
-                        HStack(spacing: 0){
-                            Text("8")
-                            Text("분 전 ")
-                            Image(systemName: "arrow.circlepath")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 12)
-                        }
-                        .font(.RCaption1)
-                    }
+                        .foregroundColor(.rDarkGray)
+                        .padding(.top,4)
+                        .padding(.horizontal)
                 }
-                List(shoppingViewModel.shoppingItem, id: \.self) { item in
-                    HStack {
-                        Text(item.name)
+                .padding(.bottom)
+                ZStack{
+                    Color.rSuperLightGray
+                        .frame(height: 36)
+                    HStack(spacing: 0){
+                        Button{
+                            
+                        } label: {
+                            HStack(spacing: 3){
+                                Text("정렬")
+                                Image(systemName: "chevron.down")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 12)
+                            }
+                            .font(.RCaption1)
+                            .foregroundColor(.rDarkGray)
+                        }
+                        
                         Spacer()
-                        Text("\(item.quantity)")
-                        Spacer()
-                        Text("\(item.unitPrice)")
-                        Spacer()
-                        Text("\(item.price)")
-                    }
+                        
+                        Button{
+                            
+                        } label: {
+                            HStack(spacing: 0){
+                                Text("8")
+                                Text("분 전 ")
+                                Image(systemName: "arrow.circlepath")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 12)
+                            }
+                            .font(.RCaption1)
+                            .foregroundColor(.rDarkGray)
+                        }
+                    }.padding(.horizontal)
                 }
                 
+                listView
+                
                 Button{
-                    
+                    isRecoding.toggle()
                 } label: {
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(.rDarkGreen)
-                            .ignoresSafeArea()
-                            .frame(height: 60)
-                        VStack{
-                            Text("음성인식중입니다")
-                                .font(.RHeadline)
-                            HStack{
-                                Text("장보기를 잠시 중지하려면 버튼을 눌러주세요")
-                                    .font(.RCaption1)
-                            }
-                        }.foregroundColor(.white)
-                            .padding(.top)
-                    }
+                    voiceRecodingButton
+                    
                 }
                 
             }
@@ -143,15 +146,15 @@ struct CartView: View {
     private var progressbar: some View{
         let progressBarHeight: CGFloat = 24.0
                
-        return ZStack(alignment: .leading) {
-            Capsule()
-                .frame(width: progressBarWidth, height: progressBarHeight, alignment: .leading)
-                .foregroundColor(.rLightGreen)
-            Capsule()
-                .frame(width: (progressBarWidth * percent) , height: progressBarHeight-6, alignment: .leading)
-                .foregroundColor(Color.yellow)
-                .padding(5)
-        }
+        return  ZStack(alignment: .leading) {
+                Capsule()
+                    .frame(width: progressBarWidth, height: progressBarHeight, alignment: .leading)
+                    .foregroundColor(.rLightGreen)
+                Capsule()
+                    .frame(width: (progressBarWidth * percent) , height: progressBarHeight-6, alignment: .leading)
+                    .foregroundColor(Color.yellow)
+                    .padding(5)
+            }
     }
     private var indicator: some View {
         return
@@ -175,7 +178,81 @@ struct CartView: View {
                 .padding(.bottom,4)
         }
     }
+    private var voiceRecodingButton: some View{
+        return ZStack{
+            if isRecoding{
+                RoundedRectangle(cornerRadius: 20)
+                    .foregroundColor(.rDarkGreen)
+                    .ignoresSafeArea()
+                    .frame(height: 60)
+                VStack{
+                    HStack{
+                        Image("voiceRecordingLottie")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 39)
+                        Text("음성인식중입니다")
+                            .font(.RHeadline)
+                    }
+                    HStack{
+                        Text("장보기를 잠시 중지하려면 버튼을 눌러주세요.")
+                            .font(.RCaption1)
+                    }
+                }.foregroundColor(.white)
+                    .padding(.top)
+            }
+            else{
+                RoundedRectangle(cornerRadius: 20)
+                    .foregroundColor(.rGreen)
+                    .ignoresSafeArea()
+                    .frame(height: 60)
+                VStack{
+                    HStack{
+                        Image("mike")
+                        Text("장보기 재개하기")
+                            .font(.RHeadline)
+                    }
+                    HStack{
+                        Text("버튼을 누르면 다시 음성인식이 시작됩니다.")
+                            .font(.RCaption1)
+                    }
+                }.foregroundColor(.white)
+                    .padding(.top)
+            }
+        }
+    }
+    
+    private var listView: some View{
+        return List {
+                ForEach(shoppingViewModel.shoppingItem, id: \.self){ item in
+                    VStack(alignment:.leading, spacing: 0){
+                        ZStack{
+                            HStack (spacing: 0){
+                                Text(item.name)
+                                    .font(.RCallout)
+                                Spacer()
+                                Text("\(item.unitPrice) 원")
+                                    .font(.RBody)
+                            }
+                            Text("\(item.quantity)개")
+                                .font(.RCaption1)
+                                .foregroundColor(.rDarkGray)
+                            //caption2 로 바꿔야함!!!!!!!!
+                                .padding(.leading, 100)
+                        }
+
+                        Text("10:08")
+                            .font(.RCaption1)
+                            .foregroundColor(.rDarkGray)
+                        //caption2 로 바꿔야함!!!!!!!!
+                    }
+                    .padding(.vertical,2)
+                }
+            }
         
+        .listStyle(.plain)
+
+    }
 }
 
 #Preview {
