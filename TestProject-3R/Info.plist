@@ -6,5 +6,16 @@
 	<string>$(APIKey)</string>
 	<key>IDEPreferLogStreaming</key>
 	<string>YES</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>GmarketSansBold.otf</string>
+		<string>GmarketSansLight.otf</string>
+		<string>GmarketSansMedium.otf</string>
+		<string>SpoqaHanSansNeo-Bold.otf</string>
+		<string>SpoqaHanSansNeo-Light.otf</string>
+		<string>SpoqaHanSansNeo-Medium.otf</string>
+		<string>SpoqaHanSansNeo-Regular.otf</string>
+		<string>SpoqaHanSansNeo-Thin.otf</string>
+	</array>
 </dict>
 </plist>
