@@ -29,6 +29,7 @@
 		718C1E6B2CBC2E9400FC5651 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C1E6A2CBC2E9400FC5651 /* FontExtension.swift */; };
 		718C1E6D2CBC31BD00FC5651 /* FontView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C1E6C2CBC31BD00FC5651 /* FontView.swift */; };
 		718C1EA72CBCFB3500FC5651 /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C1EA62CBCFB3500FC5651 /* ProgressViewModel.swift */; };
+		718C1EBE2CBD371D00FC5651 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C1EBD2CBD371D00FC5651 /* ModalView.swift */; };
 		71BAEF172CB57BDF00E436FF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BAEF162CB57BDF00E436FF /* MainView.swift */; };
 		71C133722CAFF31E003DCCCF /* UserDefaultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C133712CAFF31E003DCCCF /* UserDefaultsModel.swift */; };
 		71D966BA2CA26C1700D971C6 /* TestProject_3RApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D966B92CA26C1700D971C6 /* TestProject_3RApp.swift */; };
@@ -61,6 +62,7 @@
 		718C1E6A2CBC2E9400FC5651 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		718C1E6C2CBC31BD00FC5651 /* FontView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontView.swift; sourceTree = "<group>"; };
 		718C1EA62CBCFB3500FC5651 /* ProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewModel.swift; sourceTree = "<group>"; };
+		718C1EBD2CBD371D00FC5651 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 		71BAEF162CB57BDF00E436FF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		71C133712CAFF31E003DCCCF /* UserDefaultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDefaultsModel.swift; path = ../Source/ViewModel/UserDefaultsModel.swift; sourceTree = "<group>"; };
 		71D966B62CA26C1700D971C6 /* TestProject-3R.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TestProject-3R.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,6 +171,7 @@
 				718C1E372CB76A6800FC5651 /* CartView.swift */,
 				71D966BB2CA26C1700D971C6 /* ContentView.swift */,
 				305F25FF2CB363E500D101A3 /* UpdateView.swift */,
+				718C1EBD2CBD371D00FC5651 /* ModalView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				71C133722CAFF31E003DCCCF /* UserDefaultsModel.swift in Sources */,
 				71BAEF172CB57BDF00E436FF /* MainView.swift in Sources */,
 				718C1E382CB76A6800FC5651 /* CartView.swift in Sources */,
+				718C1EBE2CBD371D00FC5651 /* ModalView.swift in Sources */,
 				718C1EA72CBCFB3500FC5651 /* ProgressViewModel.swift in Sources */,
 				305F26002CB363E500D101A3 /* UpdateView.swift in Sources */,
 				71D966BC2CA26C1700D971C6 /* ContentView.swift in Sources */,

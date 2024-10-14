@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MainView: View {
+    @State var showSheet: Bool = false
+    
     var body: some View {
         NavigationStack{
             HStack{
@@ -60,53 +62,70 @@ struct MainView: View {
                         .padding(.bottom, 32)
                 }
                     
-                HStack {
+                HStack(alignment: .center, spacing: 4) {
                     Text("나의 영수증")
                         .font(.RHeadline)
                     Spacer()
+                    Text("더보기")
+                        .font(.RCaption1)
+                        .foregroundColor(.rDarkGray)
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.rDarkGray)
+                        .font(.system(size: 10))
                 }
                 .padding(.horizontal, 8)
                 ScrollView(.horizontal) {
                     HStack {
                         ForEach(0..<7) { index in
-                            VStack(alignment: .leading, spacing: -1){
-                                HStack(alignment:.center
-                                ){
-                                    Text("34,500 원")
-                                        .font(.RCallout)
-                                        .padding(.trailing, 35)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.rDarkGray)
-                                        .font(.system(size: 10))
+                            Button {
+                                showSheet.toggle()
+                            } label: {
+                                VStack(alignment: .leading, spacing: -1){
+                                    HStack(alignment:.center
+                                    ){
+                                        Text("34,500 원")
+                                            .font(.RCallout)
+                                            .padding(.trailing, 35)
+                                        Spacer()
+                                        Image(systemName: "chevron.right")
+                                            .foregroundColor(.rDarkGray)
+                                            .font(.system(size: 10))
+                                    }
+                                    .padding(.top, 12)
+                                    .padding(.bottom, 10)
+                                    .padding(.horizontal, 8)
+                                    .background(.rWhite)
+                                    .clipShape(
+                                        RoundedCorner(radius: 9, corners: [.topLeft, .topRight])
+                                    )
+                                    VStack(alignment: .leading) {
+                                        Text("2024.10.04")
+                                            .font(.RCaption1)
+                                        Text("이마트 포항이동점")
+                                            .font(.RCaption2)
+                                    }
+                                    .padding(.vertical, 8)
+                                    .padding(.leading, 8)
+                                    .padding(.trailing, 64)
+                                    .background(.rLightGreen)
+                                    .clipShape(
+                                        RoundedCorner(radius: 9, corners: [.bottomLeft, .bottomRight])
+                                    )
                                 }
-                                .padding(.top, 12)
-                                .padding(.bottom, 10)
-                                .padding(.horizontal, 8)
-                                .background(.rWhite)
-                                .clipShape(
-                                    RoundedCorner(radius: 9, corners: [.topLeft, .topRight])
+                                .shadow(color: Color("RDarkGray").opacity(0.25), radius: 3, x: 0, y: 0)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 9)
+                                        .inset(by: -0.4)
+                                        .stroke(Color("RGrayGreen"), lineWidth: 0.8)
                                 )
-                                VStack(alignment: .leading) {
-                                    Text("2024.10.04")
-                                        .font(.RCaption1)
-                                    Text("이마트 포항이동점")
-                                        .font(.RCaption2)
-                                }
-                                .padding(.vertical, 8)
-                                .padding(.leading, 8)
-                                .padding(.trailing, 64)
-                                .background(.rLightGreen)
-                                .clipShape(
-                                    RoundedCorner(radius: 9, corners: [.bottomLeft, .bottomRight])
-                                )
+                                
                             }
-                            .shadow(color: Color("RDarkGray").opacity(0.25), radius: 3, x: 0, y: 0)
-                            .overlay(
-                            RoundedRectangle(cornerRadius: 9)
-                            .inset(by: -0.4)
-                            .stroke(Color("RGrayGreen"), lineWidth: 0.8)
-                            )
+                            .buttonStyle(PlainButtonStyle())
+                            .sheet(isPresented: $showSheet) {
+                                ModalView()
+                                    .presentationDetents([.medium])
+                                    .presentationDragIndicator(.visible)
+                            }
                         }
                     }
                     .padding(.horizontal, 8)
