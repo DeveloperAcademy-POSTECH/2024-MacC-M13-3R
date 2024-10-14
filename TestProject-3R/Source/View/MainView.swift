@@ -11,7 +11,7 @@ struct MainView: View {
     var body: some View {
         NavigationStack{
             HStack{
-                Text("Cart")
+                Text("짱바구니")
                     .font(.RLargeTitle)
                 Spacer()
             }
@@ -43,11 +43,7 @@ struct MainView: View {
                     }
                     .padding(.bottom, 20)
                     
-                    Rectangle()
-                        .frame(height: 25)
-                        .cornerRadius(12)
-                        .foregroundColor(.green)
-                        .padding(.bottom, 32)
+                    ProgressViewModel()
                 }
                 .padding(.horizontal, 24)
                 .background(.rWhite)
