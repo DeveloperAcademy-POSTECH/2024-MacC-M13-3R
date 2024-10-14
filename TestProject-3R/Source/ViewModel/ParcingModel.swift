@@ -56,12 +56,13 @@ class ShoppingViewModel:ObservableObject {
     @Published var dateItem: [DateItem] = []
     @Published var shoppingItem: [ShoppingItem] = []
     
+    
     init(){
         loadShoppingListFromUserDefaults()
         
         if shoppingItem.isEmpty {
             shoppingItem = [
-                ShoppingItem(name: "테스트1", quantity: 1, unitPrice: 1000, price: 1000),
+                ShoppingItem(name: "일이삼사오육칠팔구십일이삼", quantity: 1, unitPrice: 1000, price: 1000),
                 ShoppingItem(name: "테스트2", quantity: 2, unitPrice: 5000, price: 10000),
                 ShoppingItem(name: "테스트3", quantity: 3, unitPrice: 10000, price: 30000),
                 ShoppingItem(name: "테스트4", quantity: 4, unitPrice: 1500, price: 6000),
