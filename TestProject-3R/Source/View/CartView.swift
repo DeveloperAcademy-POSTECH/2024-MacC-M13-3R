@@ -4,6 +4,12 @@ struct CartView: View {
     @StateObject private var shoppingViewModel = ShoppingViewModel()
     
     @State private var percent: CGFloat = 0.4 //프로그래스바 퍼센트
+    @State private var price: Int = 0 //현재까지 담은 가격
+    @State private var percentText: String = "이제 아껴볼까요?"
+    @State private var percentColor: Color = Color.rYellow
+    @State private var remaining: Int = 0//남은돈
+    @State private var fullMoney: Int = 50000//초기 예산
+    @State private var place: String = "이마트 포항이동점"
     
     let size: CGSize
     let fullWidth: CGFloat
@@ -12,7 +18,7 @@ struct CartView: View {
     init(size: CGSize) {
         self.size = size
         self.fullWidth = size.width
-        self.progressBarWidth = size.width * 0.75
+        self.progressBarWidth = size.width * 0.8
     }
     
     var body: some View {
@@ -21,27 +27,60 @@ struct CartView: View {
                 HStack(spacing: 0){
                     VStack(alignment: .leading, spacing: 0){
                         Text("이마트 포항이동점")
-                            .padding(.bottom, 10)
-                        Text("15,500 원")
-                            .font(.largeTitle)
-                            .bold()
-                            .padding(.bottom, 5)
+                            .font(.RHeadline)
+                            .padding(.top, 36)
+                        Text("\(price) 원")
+                            .font(.RMain)
+                            .padding(.top, 4)
                         HStack(spacing: 0){
                             Text("예산까지 ")
-                            Text("35,500 원")
-                                .foregroundColor(.yellow)
+                                .font(.RBody)
+                            Text("\(remaining) 원")
+                                .font(.RCallout)
+                                .foregroundColor(.rOrange)
                             Text(" 남았어요!")
-                        }.padding(.bottom, 10)
+                                .font(.RBody)
+                        }.padding(.top, 4)
                     }
                     Spacer()
                 }.padding(.horizontal)
                 
-                indicatorText
-                ZStack{
+                ZStack(alignment: .leading){
                     progressbar
-                    indicator
-                }
+                        .padding(.top, 24)
+                    VStack(alignment: .center){
+                        indicatorText
+                        indicator
+                    }.padding(.leading, (progressBarWidth * percent)-CGFloat(percentText.count/2)*10)
+                }.padding(.top, 13)
                 
+                HStack(spacing: 0){
+                    Button{
+                        
+                    } label: {
+                        HStack(spacing: 3){
+                            Text("정렬")
+                            Image(systemName: "chevron.down")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 12)
+                        }
+                        .font(.RCaption1)
+                    }
+                    Button{
+                        
+                    } label: {
+                        HStack(spacing: 0){
+                            Text("8")
+                            Text("분 전 ")
+                            Image(systemName: "arrow.circlepath")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 12)
+                        }
+                        .font(.RCaption1)
+                    }
+                }
                 List(shoppingViewModel.shoppingItem, id: \.self) { item in
                     HStack {
                         Text(item.name)
@@ -59,14 +98,15 @@ struct CartView: View {
                 } label: {
                     ZStack{
                         RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(.green)
+                            .foregroundColor(.rDarkGreen)
                             .ignoresSafeArea()
                             .frame(height: 60)
                         VStack{
-                            Text("버튼을 누른 채, 카트에 담는")
+                            Text("음성인식중입니다")
+                                .font(.RHeadline)
                             HStack{
-                                Text("[상품명, 수량, 가격]").bold()
-                                Text("을 말씀해주세요")
+                                Text("장보기를 잠시 중지하려면 버튼을 눌러주세요")
+                                    .font(.RCaption1)
                             }
                         }.foregroundColor(.white)
                             .padding(.top)
@@ -75,62 +115,64 @@ struct CartView: View {
                 
             }
             .navigationTitle("장바구니")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button(action: {
-                            print("수정중")
-                        }) {
-                            Text("수정하기")
-                                .foregroundColor(.green)
-                        }
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            MainView()
-                        }) {
-                            Text("종료")
-                                .foregroundColor(.green)
-                        }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        print("수정중")
+                    }) {
+                        Text("수정하기")
+                            .font(.RBody)
+                            .foregroundColor(.rDarkGreen)
                     }
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        MainView()
+                    }) {
+                        Text("종료")
+                            .font(.RBody)
+                            .foregroundColor(.rDarkGreen)
+                        
+                    }
+                }
+            }
         }
     }
     
     private var progressbar: some View{
-        let progressBarHeight: CGFloat = 30.0
+        let progressBarHeight: CGFloat = 24.0
                
         return ZStack(alignment: .leading) {
             Capsule()
                 .frame(width: progressBarWidth, height: progressBarHeight, alignment: .leading)
-                .foregroundColor(Color.gray)
+                .foregroundColor(.rLightGreen)
             Capsule()
-                .frame(width: (progressBarWidth * percent) , height: progressBarHeight-7, alignment: .leading)
+                .frame(width: (progressBarWidth * percent) , height: progressBarHeight-6, alignment: .leading)
                 .foregroundColor(Color.yellow)
                 .padding(5)
         }
     }
     private var indicator: some View {
-        return HStack(spacing: 0) {
-            ZStack{
-                Circle()
-                    .frame(width: 25)
-                    .foregroundColor(.white)
-                Text(Image(systemName: "cart"))
-                    .font(.system(size: 20))
-            }.padding(.leading, progressBarWidth * percent)
-            Spacer()
+        return
+        ZStack{
+            Circle()
+                .frame(width: 18)
+                .foregroundColor(.white)
+                .shadow(radius: 1)
+            Text(Image(systemName: "cart"))
+                .font(.system(size: 15))
         }
     }
     private var indicatorText: some View {
-
-        return HStack(spacing: 0) {
-            ZStack{
-                Text("필수 리스트부터 구매해볼까요?")
-                    .font(.caption2)
-                    .background(.gray)
-            }.padding(.leading, (progressBarWidth * percent)-50)
-            Spacer()
+        return ZStack{
+            Image("polygon")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 89)
+            Text(percentText)
+                .font(.RCaption1)
+                .padding(.bottom,4)
         }
     }
         
