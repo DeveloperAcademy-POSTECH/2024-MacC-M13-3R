@@ -16,9 +16,9 @@ struct BudgetView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .center) {
-                HStack{
+                HStack(spacing: 0){
                     Text("예산 정하기")
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.RHeadline)
                     Spacer()
                 }
                 .padding(.top, 36)
@@ -27,19 +27,19 @@ struct BudgetView: View {
                     .padding(.bottom, 16)
                 HStack{
                     Text("오늘의 장보기 예산을 입력해주세요")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.RBody)
                     Spacer()
                 }
                 .padding(.bottom, 2)
                 
                 HStack(alignment: .bottom){
                     Text("\(Int(sliderValue)) 원")
-                        .font(.system(size: 18))
+                        .font(.RTitle)
                     
                     Button("직접입력") {
                         showSheet = true
                     }
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.RCaption2)
                     .underline()
                     .foregroundColor(.gray)
                     .sheet(isPresented: $showSheet) {
@@ -62,7 +62,7 @@ struct BudgetView: View {
                     Spacer()
                     Text("250,000+")
                 }
-                .font(.caption)
+                .font(.RCaption1)
                 .foregroundColor(.gray)
                 .padding(.horizontal)
                 
@@ -71,7 +71,7 @@ struct BudgetView: View {
                 
                 HStack{
                     Text("장소 입력하기")
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.RHeadline)
                     Spacer()
                 }
                 .padding(.bottom, 4)
@@ -79,15 +79,15 @@ struct BudgetView: View {
                     .padding(.bottom, 16)
                 HStack{
                     Text("오늘의 장보기 장소를 입력해주세요")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.RBody)
                     Spacer()
                 }
                 .padding(.bottom, 2)
                 HStack(alignment: .bottom){
                     Text("이마트 포항이동점")
-                        .font(.system(size: 18))
+                        .font(.RTitle)
                     Text("직접입력")
-                        .font(.system(size: 8, weight: .medium))
+                        .font(.RCaption2)
                         .underline()
                         .foregroundColor(.gray)
                     Spacer()
@@ -103,6 +103,39 @@ struct BudgetView: View {
                 Image("sample_map")
                 
                 Spacer()
+                
+                NavigationLink(destination: CartView(size: CGSize(width: 300, height: 20))) {
+                    Text("장보기 시작하기")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .font(.RHeadline)
+                        .frame(width: 361, height: 52)
+                        .background(.rGreen)
+                        .cornerRadius(15)
+                        .padding(.bottom, 32)
+                }
+                
+                .navigationTitle("장보기 준비하기")
+                .navigationBarTitleDisplayMode(.inline)
+            }.padding(.horizontal, 16)
+                .tint(.green)
+                .onAppear(){
+                    //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
+                    //            let yourLongitudeString = String(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")
+                    //            self.latitude = (Double(yourLatitudeString) ?? 0)
+                    //            self.longitude =  (Double(yourLongitudeString) ?? 0)
+                    //            // city and country
+                    //            let locationInfo = LocationInfo()
+                    //            locationInfo.getCityLocation(latitude: self.latitude, longitude: self.longitude) { city, country in
+                    //                if let city = city, let country = country {
+                    //                    self.cityN = city
+                    //                    self.countryC = country
+                    //                    print("City: \(city), Country: \(country)")
+                    //                } else {
+                    //                    print("Unable to fetch location information.")
+                    //                }
+                    //            }
+                }
                 NavigationLink(destination: UpdateView(speechRecognizer: SpeechRecognizer())) {
                     NavigationLink(destination: CartView(size: CGSize(width: 300, height: 20))) {
                         Text("장보기 시작하기")
@@ -158,6 +191,11 @@ struct BudgetView: View {
             VStack {
                 Spacer()
                 Text("오늘의 장보기 예산을 입력해주세요")
+                    .font(.RBody)
+                Spacer()
+                HStack {
+                    TextField("50000", text: $inputValue)
+                        .font(.RMain)
                     .font(.system(size: 15, weight: .medium))
                 Spacer()
                 HStack {
@@ -171,6 +209,7 @@ struct BudgetView: View {
                     //                        }
                     //                        showSheet = false
                     //                    }
+                        .frame(width: 150)
                         .frame(width: 200)
                         .multilineTextAlignment(.center)
                     Text("원")
@@ -183,6 +222,16 @@ struct BudgetView: View {
                     }
                     showSheet = false
                 }
+                .foregroundColor(.white)
+                .font(.RHeadline)
+                .frame(width: 361, height: 52)
+                .background(.rDarkGreen)
+                .cornerRadius(15)
+                .padding(.bottom, 32)
+            }
+            .onAppear {
+                inputValue = "\(Int(sliderValue))"
+            }
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
                 .font(.system(size: 16))
