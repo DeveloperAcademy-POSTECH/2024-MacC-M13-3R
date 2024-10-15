@@ -137,7 +137,7 @@ struct UpdateView: View {
                             return ShoppingItem(name: name, quantity: quantity, unitPrice: unitPrice, price: price)
                         }
                         let totalPrice = shoppingViewModel.shoppingItem.reduce(0) { $0 + $1.price }
-                        let dateItem = DateItem(date: shoppingViewModel.removeSeconds(from: Date()), items: shoppingViewModel.shoppingItem, total: totalPrice)
+                        let dateItem = DateItem(date: shoppingViewModel.removeSeconds(from: Date()), items: shoppingViewModel.shoppingItem, total: totalPrice, place: "장소")
                         shoppingViewModel.dateItem.append(dateItem)
                         
                         shoppingViewModel.saveShoppingListToUserDefaults()

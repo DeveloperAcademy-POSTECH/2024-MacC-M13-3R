@@ -38,10 +38,11 @@ func createCSV(from content: String) -> URL? {
 //---------------------------------------------------------------------------------
 // MARK: UserDefaults 데이터모델
 
-struct DateItem: Codable {
+struct DateItem: Codable, Hashable {
     var date: Date
     var items: [ShoppingItem]
     var total: Int //총 금액
+    var place: String
 }
 
 struct ShoppingItem: Identifiable, Codable, Hashable {
@@ -55,7 +56,8 @@ struct ShoppingItem: Identifiable, Codable, Hashable {
 class ShoppingViewModel:ObservableObject {
     @Published var dateItem: [DateItem] = []
     @Published var shoppingItem: [ShoppingItem] = []
-    
+    @Published var selectedDateItem: DateItem?
+
     
     init(){
         loadShoppingListFromUserDefaults()
@@ -78,6 +80,14 @@ class ShoppingViewModel:ObservableObject {
 
             saveShoppingListToUserDefaults()
         }
+        if dateItem.isEmpty {
+            dateItem = [
+                DateItem(date: Date(), items: shoppingItem, total: 50000, place: "이마트 포항이동점"),
+                DateItem(date: Date(), items: shoppingItem, total: 80000, place: "홈플러스 포항점")
+            ]
+
+            saveShoppingListToUserDefaults()
+        }
     }
     
     // MARK: 데이터를 인코딩하고 UserDefaults에 저장
@@ -93,7 +103,9 @@ class ShoppingViewModel:ObservableObject {
             if let saveLists = try? JSONDecoder().decode([DateItem].self, from: savedData){
                 dateItem = saveLists
                 
-//                print("---------------------------------------------------------")
+//                let recentDates = dateItem.suffix(7)
+//                for date in recentDates {}
+                    
                 for date in dateItem {
                     print("*************************************")
                     print("dateItem: : ", date.date)
@@ -111,5 +123,11 @@ class ShoppingViewModel:ObservableObject {
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
         components.second = 0
         return calendar.date(from: components) ?? date
+    }
+    // MARK: 현재 날짜 출력
+    func formatDate(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        return formatter.string(from: date)
     }
 }
