@@ -337,19 +337,19 @@ struct CartView: View {
         let budget = CGFloat(shoppingViewModel.nowBudget ?? 50000)
         percent = (CGFloat(price) / budget)
         
-        if percent<=0.33 {
+        if percent<=0.4 {
             percentColor = Color.rYellow
         }
-        else if 0.33<percent && percent<=0.66 {
+        else if 0.4<percent && percent<=0.8 {
             percentColor = Color.rOrange
         }
         else {
             percentColor = Color.rRed
         }
-        print("percent= ", percent)
-        print("progressBarWidth= ", progressBarWidth)
-        print("(progressBarWidth * percent)= ",(progressBarWidth * percent))
-        print("progressBarWidth * percent-10 =", progressBarWidth * percent-10 )
+//        print("percent= ", percent)
+//        print("progressBarWidth= ", progressBarWidth)
+//        print("(progressBarWidth * percent)= ",(progressBarWidth * percent))
+//        print("progressBarWidth * percent-10 =", progressBarWidth * percent-10 )
     }
 }
 
