@@ -39,6 +39,7 @@
 		71D966C12CA26C1800D971C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71D966C02CA26C1800D971C6 /* Preview Assets.xcassets */; };
 		71D966CC2CA26C5F00D971C6 /* SttView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D966CB2CA26C5F00D971C6 /* SttView.swift */; };
 		71D966CE2CA26C6800D971C6 /* GptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D966CD2CA26C6800D971C6 /* GptView.swift */; };
+		71F30CA72CBE64EB00EA4EF4 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F30CA62CBE64EB00EA4EF4 /* ListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		71D966C02CA26C1800D971C6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71D966CB2CA26C5F00D971C6 /* SttView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SttView.swift; sourceTree = "<group>"; };
 		71D966CD2CA26C6800D971C6 /* GptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GptView.swift; sourceTree = "<group>"; };
+		71F30CA62CBE64EB00EA4EF4 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 				7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */,
 				305F26032CB9237600D101A3 /* LocationManager.swift */,
 				7168CC752CB57EFC00A01E28 /* ParcingModel.swift */,
+				71F30CA62CBE64EB00EA4EF4 /* ListViewModel.swift */,
 				718C1EA62CBCFB3500FC5651 /* ProgressViewModel.swift */,
 			);
 			path = ViewModel;
@@ -301,6 +304,7 @@
 				715DCCD82CAFD87A00E899A5 /* UserDefaultsTestView.swift in Sources */,
 				71D966CC2CA26C5F00D971C6 /* SttView.swift in Sources */,
 				305F26042CB9237600D101A3 /* LocationManager.swift in Sources */,
+				71F30CA72CBE64EB00EA4EF4 /* ListViewModel.swift in Sources */,
 				7168CC7A2CB59ED100A01E28 /* ParcingView.swift in Sources */,
 				7164D99D2CA3A8E800598405 /* SpeechRecognizer.swift in Sources */,
 				718C1E362CB5A08300FC5651 /* BudgetView.swift in Sources */,

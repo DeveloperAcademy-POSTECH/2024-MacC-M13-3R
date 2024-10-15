@@ -9,16 +9,6 @@ import SwiftUI
 
 struct ModalView: View {
     @ObservedObject var shoppingViewModel: ShoppingViewModel
-    //    let items: [(String, Int, Int, Int)] = [
-    //            ("쌀 (5kg)", 1, 15000, 15000),
-    //            ("라면", 5, 800, 4000),
-    //            ("계란 (10개)", 1, 3000, 3000),
-    //            ("냉동만두", 1, 5000, 5000),
-    //            ("우유 (1L)", 1, 1500, 1500),
-    //            ("치킨너겟 (500g)", 1, 2000, 2000),
-    //            ("샐러드 (300g)", 1, 1000, 1000),
-    //            ("음료수 (1.5L)", 1, 500, 500)
-    //        ]
     
     var body: some View {
         VStack (alignment: .leading) {
