@@ -2,6 +2,8 @@ import SwiftUI
 
 
 struct BudgetView: View {
+    @ObservedObject var shoppingViewModel: ShoppingViewModel
+    
     @State var sliderValue = 0.0
     //    @State var inputValue = "50000"
     @State var showSheet = false
@@ -43,7 +45,7 @@ struct BudgetView: View {
                     .underline()
                     .foregroundColor(.gray)
                     .sheet(isPresented: $showSheet) {
-                        ModalView(showSheet: $showSheet, sliderValue: $sliderValue)
+                        BudgetModalView(showSheet: $showSheet, sliderValue: $sliderValue)
                             .presentationDetents([.height(300)])
                             .presentationDragIndicator(.visible)
                     }
@@ -56,6 +58,7 @@ struct BudgetView: View {
                     .onChange(of: sliderValue) { NewValue in
                         let impactMed = UIImpactFeedbackGenerator(style: .light)
                         impactMed.impactOccurred()
+                        shoppingViewModel.nowBudget = Int(sliderValue)
                     }
                 HStack {
                     Text("50,000-")
@@ -104,7 +107,7 @@ struct BudgetView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: CartView(size: CGSize(width: 300, height: 20))) {
+                NavigationLink(destination: CartView(size: CGSize(width: 450, height: 50), shoppingViewModel: shoppingViewModel)) {
                     Text("장보기 시작하기")
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
@@ -136,23 +139,7 @@ struct BudgetView: View {
                     //                }
                     //            }
                 }
-                NavigationLink(destination: UpdateView(speechRecognizer: SpeechRecognizer())) {
-                    NavigationLink(destination: CartView(size: CGSize(width: 300, height: 20))) {
-                        Text("장보기 시작하기")
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                            .font(.system(size: 16))
-                            .padding(.horizontal, 132)
-                            .padding(.vertical, 12)
-                            .background(.green)
-                            .cornerRadius(15)
-                            .padding(.bottom, 36)
-                    }
-                }
-                .padding(.horizontal, 16)
-                .navigationTitle("장보기 준비하기")
-                .navigationBarTitleDisplayMode(.inline)
-            }
+        }
             .tint(.green)
             .onAppear(){
                 //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
@@ -182,7 +169,7 @@ struct BudgetView: View {
         //    }
     }
     
-    struct ModalView: View {
+    struct BudgetModalView: View {
         @State private var inputValue = "50000"
         @Binding var showSheet: Bool
         @Binding var sliderValue: Double
@@ -229,9 +216,6 @@ struct BudgetView: View {
                 .cornerRadius(15)
                 .padding(.bottom, 32)
             }
-            .onAppear {
-                inputValue = "\(Int(sliderValue))"
-            }
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
                 .font(.system(size: 16))
@@ -247,7 +231,7 @@ struct BudgetView: View {
             
         }
     }
-}
+
 
 func impact(style: UIImpactFeedbackGenerator.FeedbackStyle) {
     let generator = UIImpactFeedbackGenerator(style: style)
@@ -255,5 +239,5 @@ func impact(style: UIImpactFeedbackGenerator.FeedbackStyle) {
 }
 
 #Preview {
-    BudgetView()
+    BudgetView(shoppingViewModel: ShoppingViewModel())
 }
