@@ -5,14 +5,15 @@ struct BudgetView: View {
     @ObservedObject var shoppingViewModel: ShoppingViewModel
     
     @State var sliderValue = 0.0
+    @State private var inputPlaceValue = ""
     //    @State var inputValue = "50000"
-    @State var showSheet = false
+    @State var showSheet1 = false
     @FocusState private var isTextFieldFocused: Bool
     //    @State private var locationDataManager = LocationManager()
     @State private var latitude: Double = 0
     @State private var longitude: Double = 0
-    @State private var cityN:String = ""
-    @State  private var countryC:String = ""
+    @State private var cityN: String = ""
+    @State  private var countryC: String = ""
     
     
     var body: some View {
@@ -39,13 +40,13 @@ struct BudgetView: View {
                         .font(.RTitle)
                     
                     Button("직접입력") {
-                        showSheet = true
+                        showSheet1 = true
                     }
                     .font(.RCaption2)
                     .underline()
                     .foregroundColor(.gray)
-                    .sheet(isPresented: $showSheet) {
-                        BudgetModalView(showSheet: $showSheet, sliderValue: $sliderValue)
+                    .sheet(isPresented: $showSheet1) {
+                        BudgetModalView(showSheet: $showSheet1, sliderValue: $sliderValue)
                             .presentationDetents([.height(300)])
                             .presentationDragIndicator(.visible)
                     }
@@ -86,15 +87,13 @@ struct BudgetView: View {
                     Spacer()
                 }
                 .padding(.bottom, 2)
-                HStack(alignment: .bottom){
-                    Text("이마트 포항이동점")
-                        .font(.RTitle)
-                    Text("직접입력")
-                        .font(.RCaption2)
-                        .underline()
-                        .foregroundColor(.gray)
-                    Spacer()
+                HStack {
+                    TextField("이마트 포항이동점", text: $inputPlaceValue)
+                        .font(.RHeadline)
+                        .font(.system(size: 16, weight: .medium))
+                        .frame(width: 500)
                 }
+                .padding(.leading, 135)
                 .padding(.bottom, 20)
                 
                 //                Text("City : \(cityN)")
@@ -122,115 +121,102 @@ struct BudgetView: View {
                 .navigationBarTitleDisplayMode(.inline)
             }.padding(.horizontal, 16)
                 .tint(.green)
-//                .onAppear(){
-                    //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
-                    //            let yourLongitudeString = String(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")
-                    //            self.latitude = (Double(yourLatitudeString) ?? 0)
-                    //            self.longitude =  (Double(yourLongitudeString) ?? 0)
-                    //            // city and country
-                    //            let locationInfo = LocationInfo()
-                    //            locationInfo.getCityLocation(latitude: self.latitude, longitude: self.longitude) { city, country in
-                    //                if let city = city, let country = country {
-                    //                    self.cityN = city
-                    //                    self.countryC = country
-                    //                    print("City: \(city), Country: \(country)")
-                    //                } else {
-                    //                    print("Unable to fetch location information.")
-                    //                }
-                    //            }
-//                }
+            //                .onAppear(){
+            //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
+            //            let yourLongitudeString = String(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")
+            //            self.latitude = (Double(yourLatitudeString) ?? 0)
+            //            self.longitude =  (Double(yourLongitudeString) ?? 0)
+            //            // city and country
+            //            let locationInfo = LocationInfo()
+            //            locationInfo.getCityLocation(latitude: self.latitude, longitude: self.longitude) { city, country in
+            //                if let city = city, let country = country {
+            //                    self.cityN = city
+            //                    self.countryC = country
+            //                    print("City: \(city), Country: \(country)")
+            //                } else {
+            //                    print("Unable to fetch location information.")
+            //                }
+            //            }
+            //                }
         }
-            .tint(.green)
-//            .onAppear(){
-                //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
-                //            let yourLongitudeString = String(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")
-                //            self.latitude = (Double(yourLatitudeString) ?? 0)
-                //            self.longitude =  (Double(yourLongitudeString) ?? 0)
-                //            // city and country
-                //            let locationInfo = LocationInfo()
-                //            locationInfo.getCityLocation(latitude: self.latitude, longitude: self.longitude) { city, country in
-                //                if let city = city, let country = country {
-                //                    self.cityN = city
-                //                    self.countryC = country
-                //                    print("City: \(city), Country: \(country)")
-                //                } else {
-                //                    print("Unable to fetch location information.")
-                //                }
-                //            }
-//            }
-        }
-        //    private func updateSliderValue() {
-        //        if let newDoubleValue = Double(sliderValue) {
-        //            DispatchQueue.main.async{
-        //
-        //                sliderValue = newDoubleValue
+        .tint(.green)
+        //            .onAppear(){
+        //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
+        //            let yourLongitudeString = String(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")
+        //            self.latitude = (Double(yourLatitudeString) ?? 0)
+        //            self.longitude =  (Double(yourLongitudeString) ?? 0)
+        //            // city and country
+        //            let locationInfo = LocationInfo()
+        //            locationInfo.getCityLocation(latitude: self.latitude, longitude: self.longitude) { city, country in
+        //                if let city = city, let country = country {
+        //                    self.cityN = city
+        //                    self.countryC = country
+        //                    print("City: \(city), Country: \(country)")
+        //                } else {
+        //                    print("Unable to fetch location information.")
+        //                }
         //            }
-        //        }
-        //    }
+        //            }
     }
+    //    private func updateSliderValue() {
+    //        if let newDoubleValue = Double(sliderValue) {
+    //            DispatchQueue.main.async{
+    //
+    //                sliderValue = newDoubleValue
+    //            }
+    //        }
+    //    }
+}
+
+struct BudgetModalView: View {
+    @State private var inputValue = "50000"
+    @Binding var showSheet: Bool
+    @Binding var sliderValue: Double
     
-    struct BudgetModalView: View {
-        @State private var inputValue = "50000"
-        @Binding var showSheet: Bool
-        @Binding var sliderValue: Double
-        
-        var body: some View {
-            VStack {
-                Spacer()
-                Text("오늘의 장보기 예산을 입력해주세요")
-                    .font(.RBody)
-                Spacer()
-                HStack {
-                    TextField("50000", text: $inputValue)
-                        .font(.RMain)
-                    .font(.system(size: 15, weight: .medium))
-                Spacer()
-                HStack {
-                    TextField("50000", text: $inputValue)
-                        .font(.system(size: 30, weight: .bold))
-                        .keyboardType(.decimalPad)
-                        .font(.system(size: 16, weight: .medium))
-                    //                    .onSubmit {
-                    //                        if let newValue = Double(inputValue){
-                    //                            sliderValue = newValue
-                    //                        }
-                    //                        showSheet = false
-                    //                    }
-                        .frame(width: 150)
-                        .frame(width: 200)
-                        .multilineTextAlignment(.center)
-                    Text("원")
-                        .font(.system(size: 20, weight: .medium))
+    var body: some View {
+        VStack {
+            Spacer()
+            Text("오늘의 장보기 예산을 입력해주세요")
+                .font(.RBody)
+            Spacer()
+            Spacer()
+            HStack {
+                TextField("50000", text: $inputValue)
+                    .font(.RMain)
+                    .keyboardType(.decimalPad)
+                    .font(.system(size: 16, weight: .medium))
+                //                    .onSubmit {
+                //                        if let newValue = Double(inputValue){
+                //                            sliderValue = newValue
+                //                        }
+                //                        showSheet = false
+                //                    }
+                    .frame(width: 150)
+                    .multilineTextAlignment(.center)
+                Text("원")
+                    .font(.system(size: 20, weight: .medium))
+            }
+            Spacer()
+            Button("입력") {
+                if let newValue = Double(inputValue){
+                    sliderValue = newValue
                 }
-                Spacer()
-                Button("입력") {
-                    if let newValue = Double(inputValue){
-                        sliderValue = newValue
-                    }
-                    showSheet = false
-                }
-                .foregroundColor(.white)
-                .font(.RHeadline)
-                .frame(width: 361, height: 52)
-                .background(.rDarkGreen)
-                .cornerRadius(15)
-                .padding(.bottom, 32)
+                showSheet = false
             }
-                .fontWeight(.semibold)
-                .foregroundColor(.white)
-                .font(.system(size: 16))
-                .padding(.horizontal, 132)
-                .padding(.vertical, 12)
-                .background(.green)
-                .cornerRadius(15)
-                .padding(.bottom, 36)
-            }
-            .onAppear {
-                inputValue = "\(Int(sliderValue))"
-            }
+            .foregroundColor(.white)
+            .font(.RHeadline)
+            .frame(width: 361, height: 52)
+            .background(.rDarkGreen)
+            .cornerRadius(15)
+            .padding(.bottom, 32)
+        }
+        .onAppear {
+            inputValue = "\(Int(sliderValue))"
             
         }
     }
+    
+}
 
 
 func impact(style: UIImpactFeedbackGenerator.FeedbackStyle) {
