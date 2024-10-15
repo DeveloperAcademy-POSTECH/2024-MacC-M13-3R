@@ -111,6 +111,7 @@ struct BudgetView: View {
                 
                 Spacer()
                 NavigationLink(destination: UpdateView(speechRecognizer: SpeechRecognizer())) {
+                NavigationLink(destination: CartView(size: CGSize(width: 300, height: 20))) {
                     Text("장보기 시작하기")
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
