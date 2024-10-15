@@ -1,10 +1,3 @@
-//
-//  BudgetView.swift
-//  TestProject-3R
-//
-//  Created by 임이지 on 10/9/24.
-//
-
 import SwiftUI
 
 
