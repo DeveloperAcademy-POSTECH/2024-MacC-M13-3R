@@ -1,0 +1,113 @@
+import Foundation
+
+
+
+// MARK: UserDefaults 데이터모델
+
+struct DateItem: Codable, Hashable {
+    var date: Date
+    var items: [ShoppingItem]
+    var total: Int //총 금액
+    var place: String
+}
+
+struct ShoppingItem: Identifiable, Codable, Hashable {
+    var id = UUID()
+    var name: String
+    var quantity: Int
+    var unitPrice: Int //단가
+    var price: Int //수량*단가
+}
+
+class ShoppingViewModel:ObservableObject {
+    @Published var dateItem: [DateItem] = []
+    @Published var shoppingItem: [ShoppingItem] = []
+    @Published var selectedDateItem: DateItem?
+    
+    
+    @Published var budget: Int? // 예산
+//    @State private var isEdit: Bool = true  //수정버튼
+//    @State private var place: String = "이마트 포항이동점"
+//    
+//    @State private var budget: Int = 50000  //초기 예산
+//    @State private var remaining: Int = 0   //남은돈
+//    @State private var price: Int = 0       //현재까지 담은 가격
+//    
+//    @State private var percent: CGFloat = 0.4 //프로그래스바 퍼센트
+//    @State private var percentText: String = "이제 아껴볼까요?"
+//    @State private var percentColor: Color = Color.rYellow
+//    
+//    @State private var isSort: Bool = false    //정렬버튼
+//    @State private var isRefresh: Bool = false //새로고침버튼
+//    @State private var updateTime: Int = 8     //새로고침시간
+//    @State private var isRecoding: Bool = true //음성인식버튼
+    
+    init(){
+        loadShoppingListFromUserDefaults()
+        
+        if shoppingItem.isEmpty {
+            shoppingItem = [
+                ShoppingItem(name: "일이삼사오육칠팔구십일이삼", quantity: 1, unitPrice: 1000, price: 1000),
+                ShoppingItem(name: "테스트2", quantity: 2, unitPrice: 5000, price: 10000),
+                ShoppingItem(name: "테스트3", quantity: 3, unitPrice: 10000, price: 30000),
+                ShoppingItem(name: "테스트4", quantity: 4, unitPrice: 1500, price: 6000),
+                ShoppingItem(name: "테스트5", quantity: 5, unitPrice: 2000, price: 10000),
+                ShoppingItem(name: "테스트6", quantity: 6, unitPrice: 2500, price: 15000),
+                ShoppingItem(name: "테스트7", quantity: 7, unitPrice: 3000, price: 21000),
+                ShoppingItem(name: "테스트8", quantity: 8, unitPrice: 3500, price: 28000),
+                ShoppingItem(name: "테스트9", quantity: 9, unitPrice: 4000, price: 36000),
+                ShoppingItem(name: "테스트10", quantity: 10, unitPrice: 4500, price: 45000),
+                ShoppingItem(name: "테스트11", quantity: 11, unitPrice: 5000, price: 55000),
+                ShoppingItem(name: "테스트12", quantity: 12, unitPrice: 5500, price: 66000)
+            ]
+
+            saveShoppingListToUserDefaults()
+        }
+        if dateItem.isEmpty {
+            dateItem = [
+                DateItem(date: Date(), items: shoppingItem, total: 50000, place: "이마트 포항이동점"),
+                DateItem(date: Date(), items: shoppingItem, total: 80000, place: "홈플러스 포항점")
+            ]
+
+            saveShoppingListToUserDefaults()
+        }
+    }
+    
+    // MARK: 데이터를 인코딩하고 UserDefaults에 저장
+    func saveShoppingListToUserDefaults() {
+        if let encoded = try? JSONEncoder().encode(dateItem) {
+            UserDefaults.standard.set(encoded, forKey: "shoppingLists")
+        }
+    }
+    
+    // MARK: UserDefaults에서 데이터를 불러오기
+    func loadShoppingListFromUserDefaults() {
+        if let savedData = UserDefaults.standard.data(forKey: "shoppingLists") {
+            if let saveLists = try? JSONDecoder().decode([DateItem].self, from: savedData){
+                dateItem = saveLists
+                    
+                for date in dateItem {
+                    print("*************************************")
+                    print("dateItem: : ", date.date)
+                    for item in date.items {
+                        print("\(item.name): \(item.quantity)개 단가:\(item.unitPrice)원 합계:\(item.price)")
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: 현재 날짜에서 초만 삭제 (초를 0으로 설정)
+    func removeSeconds(from date: Date) -> Date {
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        components.second = 0
+        return calendar.date(from: components) ?? date
+    }
+    // MARK: 현재 날짜 출력
+    func formatDate(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        return formatter.string(from: date)
+    }
+}

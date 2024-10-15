@@ -1,10 +1,3 @@
-//
-//  BudgetView.swift
-//  TestProject-3R
-//
-//  Created by 임이지 on 10/9/24.
-//
-
 import SwiftUI
 
 
@@ -143,6 +136,41 @@ struct BudgetView: View {
                     //                }
                     //            }
                 }
+                NavigationLink(destination: UpdateView(speechRecognizer: SpeechRecognizer())) {
+                    NavigationLink(destination: CartView(size: CGSize(width: 300, height: 20))) {
+                        Text("장보기 시작하기")
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .font(.system(size: 16))
+                            .padding(.horizontal, 132)
+                            .padding(.vertical, 12)
+                            .background(.green)
+                            .cornerRadius(15)
+                            .padding(.bottom, 36)
+                    }
+                }
+                .padding(.horizontal, 16)
+                .navigationTitle("장보기 준비하기")
+                .navigationBarTitleDisplayMode(.inline)
+            }
+            .tint(.green)
+            .onAppear(){
+                //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
+                //            let yourLongitudeString = String(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")
+                //            self.latitude = (Double(yourLatitudeString) ?? 0)
+                //            self.longitude =  (Double(yourLongitudeString) ?? 0)
+                //            // city and country
+                //            let locationInfo = LocationInfo()
+                //            locationInfo.getCityLocation(latitude: self.latitude, longitude: self.longitude) { city, country in
+                //                if let city = city, let country = country {
+                //                    self.cityN = city
+                //                    self.countryC = country
+                //                    print("City: \(city), Country: \(country)")
+                //                } else {
+                //                    print("Unable to fetch location information.")
+                //                }
+                //            }
+            }
         }
         //    private func updateSliderValue() {
         //        if let newDoubleValue = Double(sliderValue) {
@@ -168,6 +196,11 @@ struct BudgetView: View {
                 HStack {
                     TextField("50000", text: $inputValue)
                         .font(.RMain)
+                    .font(.system(size: 15, weight: .medium))
+                Spacer()
+                HStack {
+                    TextField("50000", text: $inputValue)
+                        .font(.system(size: 30, weight: .bold))
                         .keyboardType(.decimalPad)
                         .font(.system(size: 16, weight: .medium))
                     //                    .onSubmit {
@@ -177,6 +210,7 @@ struct BudgetView: View {
                     //                        showSheet = false
                     //                    }
                         .frame(width: 150)
+                        .frame(width: 200)
                         .multilineTextAlignment(.center)
                     Text("원")
                         .font(.system(size: 20, weight: .medium))
@@ -198,6 +232,19 @@ struct BudgetView: View {
             .onAppear {
                 inputValue = "\(Int(sliderValue))"
             }
+                .fontWeight(.semibold)
+                .foregroundColor(.white)
+                .font(.system(size: 16))
+                .padding(.horizontal, 132)
+                .padding(.vertical, 12)
+                .background(.green)
+                .cornerRadius(15)
+                .padding(.bottom, 36)
+            }
+            .onAppear {
+                inputValue = "\(Int(sliderValue))"
+            }
+            
         }
     }
 }
