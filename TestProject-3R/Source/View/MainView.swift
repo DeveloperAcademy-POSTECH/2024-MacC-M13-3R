@@ -2,19 +2,21 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject private var shoppingViewModel = ShoppingViewModel()
+    @StateObject private var speechRecognizer = SpeechRecognizer()
+    
     @State var showSheet: Bool = false
     
     var body: some View {
         NavigationStack{
-            HStack{
-                Text("짱바구니")
-                    .font(.RLargeTitle)
-                Spacer()
-            }
-            .padding(.horizontal, 16)
-            .padding(.top, 33)
-            .padding(.bottom, 8)
             VStack {
+                HStack{
+                    Text("짱바구니")
+                        .font(.RLargeTitle)
+                    Spacer()
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 33)
+                .padding(.bottom, 8)
                 VStack (alignment: .leading) {
                     Text(shoppingViewModel.formatDate(from: Date()))
                         .font(.RHeadline)
@@ -71,7 +73,7 @@ struct MainView: View {
                 .padding(.horizontal, 8)
                 ScrollView(.horizontal) {
                     HStack {
-                        ForEach(shoppingViewModel.dateItem.suffix(7), id: \.self) { item in
+                        ForEach(shoppingViewModel.dateItem.suffix(7).reversed(), id: \.self) { item in
                             Button {
                                 shoppingViewModel.selectedDateItem = item
                                 showSheet.toggle()
@@ -189,8 +191,11 @@ struct MainView: View {
             .padding(.top,32)
             .padding(.horizontal, 16)
             .background(Color("RSuperLightGray"))
+            .onAppear{
+                shoppingViewModel.loadShoppingListFromUserDefaults()
+            }
             
-        }
+        }.navigationBarBackButtonHidden(true)
         .tint(Color("RDarkGreen"))
     }
 }
