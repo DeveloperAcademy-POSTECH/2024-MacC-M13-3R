@@ -23,9 +23,9 @@ struct BudgetView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .center) {
-                HStack{
+                HStack(spacing: 0){
                     Text("예산 정하기")
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.RHeadline)
                     Spacer()
                 }
                 .padding(.top, 36)
@@ -34,19 +34,19 @@ struct BudgetView: View {
                     .padding(.bottom, 16)
                 HStack{
                     Text("오늘의 장보기 예산을 입력해주세요")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.RBody)
                     Spacer()
                 }
                 .padding(.bottom, 2)
                 
                 HStack(alignment: .bottom){
                     Text("\(Int(sliderValue)) 원")
-                        .font(.system(size: 18))
+                        .font(.RTitle)
                     
                     Button("직접입력") {
                         showSheet = true
                     }
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.RCaption2)
                     .underline()
                     .foregroundColor(.gray)
                     .sheet(isPresented: $showSheet) {
@@ -69,7 +69,7 @@ struct BudgetView: View {
                     Spacer()
                     Text("250,000+")
                 }
-                .font(.caption)
+                .font(.RCaption1)
                 .foregroundColor(.gray)
                 .padding(.horizontal)
                 
@@ -78,7 +78,7 @@ struct BudgetView: View {
                 
                 HStack{
                     Text("장소 입력하기")
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.RHeadline)
                     Spacer()
                 }
                 .padding(.bottom, 4)
@@ -86,15 +86,15 @@ struct BudgetView: View {
                     .padding(.bottom, 16)
                 HStack{
                     Text("오늘의 장보기 장소를 입력해주세요")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.RBody)
                     Spacer()
                 }
                 .padding(.bottom, 2)
                 HStack(alignment: .bottom){
                     Text("이마트 포항이동점")
-                        .font(.system(size: 18))
+                        .font(.RTitle)
                     Text("직접입력")
-                        .font(.system(size: 8, weight: .medium))
+                        .font(.RCaption2)
                         .underline()
                         .foregroundColor(.gray)
                     Spacer()
@@ -110,99 +110,95 @@ struct BudgetView: View {
                 Image("sample_map")
                 
                 Spacer()
-                NavigationLink(destination: UpdateView(speechRecognizer: SpeechRecognizer())) {
+                
                 NavigationLink(destination: CartView(size: CGSize(width: 300, height: 20))) {
                     Text("장보기 시작하기")
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
-                        .font(.system(size: 16))
-                        .padding(.horizontal, 132)
-                        .padding(.vertical, 12)
-                        .background(.green)
+                        .font(.RHeadline)
+                        .frame(width: 361, height: 52)
+                        .background(.rGreen)
                         .cornerRadius(15)
-                        .padding(.bottom, 36)
+                        .padding(.bottom, 32)
                 }
-            }
-            .padding(.horizontal, 16)
-            .navigationTitle("장보기 준비하기")
-            .navigationBarTitleDisplayMode(.inline)
+                
+                .navigationTitle("장보기 준비하기")
+                .navigationBarTitleDisplayMode(.inline)
+            }.padding(.horizontal, 16)
+                .tint(.green)
+                .onAppear(){
+                    //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
+                    //            let yourLongitudeString = String(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")
+                    //            self.latitude = (Double(yourLatitudeString) ?? 0)
+                    //            self.longitude =  (Double(yourLongitudeString) ?? 0)
+                    //            // city and country
+                    //            let locationInfo = LocationInfo()
+                    //            locationInfo.getCityLocation(latitude: self.latitude, longitude: self.longitude) { city, country in
+                    //                if let city = city, let country = country {
+                    //                    self.cityN = city
+                    //                    self.countryC = country
+                    //                    print("City: \(city), Country: \(country)")
+                    //                } else {
+                    //                    print("Unable to fetch location information.")
+                    //                }
+                    //            }
+                }
         }
-        .tint(.green)
-        .onAppear(){
-            //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
-            //            let yourLongitudeString = String(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")
-            //            self.latitude = (Double(yourLatitudeString) ?? 0)
-            //            self.longitude =  (Double(yourLongitudeString) ?? 0)
-            //            // city and country
-            //            let locationInfo = LocationInfo()
-            //            locationInfo.getCityLocation(latitude: self.latitude, longitude: self.longitude) { city, country in
-            //                if let city = city, let country = country {
-            //                    self.cityN = city
-            //                    self.countryC = country
-            //                    print("City: \(city), Country: \(country)")
-            //                } else {
-            //                    print("Unable to fetch location information.")
-            //                }
-            //            }
-        }
+        //    private func updateSliderValue() {
+        //        if let newDoubleValue = Double(sliderValue) {
+        //            DispatchQueue.main.async{
+        //
+        //                sliderValue = newDoubleValue
+        //            }
+        //        }
+        //    }
     }
-    //    private func updateSliderValue() {
-    //        if let newDoubleValue = Double(sliderValue) {
-    //            DispatchQueue.main.async{
-    //
-    //                sliderValue = newDoubleValue
-    //            }
-    //        }
-    //    }
-}
-
-struct ModalView: View {
-    @State private var inputValue = "50000"
-    @Binding var showSheet: Bool
-    @Binding var sliderValue: Double
     
-    var body: some View {
-        VStack {
-            Spacer()
-            Text("오늘의 장보기 예산을 입력해주세요")
-                .font(.system(size: 15, weight: .medium))
-            Spacer()
-            HStack {
-                TextField("50000", text: $inputValue)
-                    .font(.system(size: 30, weight: .bold))
-                    .keyboardType(.decimalPad)
-                    .font(.system(size: 16, weight: .medium))
-//                    .onSubmit {
-//                        if let newValue = Double(inputValue){
-//                            sliderValue = newValue
-//                        }
-//                        showSheet = false
-//                    }
-                    .frame(width: 200)
-                    .multilineTextAlignment(.center)
-                Text("원")
-                    .font(.system(size: 20, weight: .medium))
-            }
-            Spacer()
-            Button("입력") {
-                if let newValue = Double(inputValue){
-                    sliderValue = newValue
-                }
-                showSheet = false
-            }
-            .fontWeight(.semibold)
-            .foregroundColor(.white)
-            .font(.system(size: 16))
-            .padding(.horizontal, 132)
-            .padding(.vertical, 12)
-            .background(.green)
-            .cornerRadius(15)
-            .padding(.bottom, 36)
-        }
-        .onAppear {
-            inputValue = "\(Int(sliderValue))"
-        }
+    struct ModalView: View {
+        @State private var inputValue = "50000"
+        @Binding var showSheet: Bool
+        @Binding var sliderValue: Double
         
+        var body: some View {
+            VStack {
+                Spacer()
+                Text("오늘의 장보기 예산을 입력해주세요")
+                    .font(.RBody)
+                Spacer()
+                HStack {
+                    TextField("50000", text: $inputValue)
+                        .font(.RMain)
+                        .keyboardType(.decimalPad)
+                        .font(.system(size: 16, weight: .medium))
+                    //                    .onSubmit {
+                    //                        if let newValue = Double(inputValue){
+                    //                            sliderValue = newValue
+                    //                        }
+                    //                        showSheet = false
+                    //                    }
+                        .frame(width: 150)
+                        .multilineTextAlignment(.center)
+                    Text("원")
+                        .font(.system(size: 20, weight: .medium))
+                }
+                Spacer()
+                Button("입력") {
+                    if let newValue = Double(inputValue){
+                        sliderValue = newValue
+                    }
+                    showSheet = false
+                }
+                .foregroundColor(.white)
+                .font(.RHeadline)
+                .frame(width: 361, height: 52)
+                .background(.rDarkGreen)
+                .cornerRadius(15)
+                .padding(.bottom, 32)
+            }
+            .onAppear {
+                inputValue = "\(Int(sliderValue))"
+            }
+        }
     }
 }
 
