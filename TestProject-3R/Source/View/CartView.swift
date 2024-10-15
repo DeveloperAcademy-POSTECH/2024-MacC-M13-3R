@@ -152,16 +152,16 @@ struct CartView: View {
     
     private var progressbar: some View{
         let progressBarHeight: CGFloat = 24.0
-               
+        
         return  ZStack(alignment: .leading) {
-                Capsule()
-                    .frame(width: progressBarWidth, height: progressBarHeight, alignment: .leading)
-                    .foregroundColor(.rLightGreen)
-                Capsule()
-                    .frame(width: (progressBarWidth * percent) , height: progressBarHeight-6, alignment: .leading)
-                    .foregroundColor(Color.yellow)
-                    .padding(5)
-            }
+            Capsule()
+                .frame(width: progressBarWidth, height: progressBarHeight, alignment: .leading)
+                .foregroundColor(.rLightGreen)
+            Capsule()
+                .frame(width: (progressBarWidth * percent) , height: progressBarHeight-6, alignment: .leading)
+                .foregroundColor(Color.yellow)
+                .padding(5)
+        }
     }
     private var indicator: some View {
         return
@@ -231,94 +231,98 @@ struct CartView: View {
     
     private var listView: some View{
         return List {
-                ForEach(shoppingViewModel.shoppingItem, id: \.self){ item in
-                    VStack(alignment:.leading, spacing: 0){
-                        ZStack{
-                            HStack (spacing: 0){
-                                Text(item.name)
-                                    .font(.RCallout)
-                                
-                                Spacer()
-                                Text("\(item.unitPrice) 원")
-                                    .font(.RBody)
-                            }
-                            Text("\(item.quantity)개")
-                                .font(.RCaption2)
-                                .foregroundColor(.rDarkGray)
-                                .padding(.leading, 80)
+            ForEach(shoppingViewModel.shoppingItem, id: \.self){ item in
+                VStack(alignment:.leading, spacing: 0){
+                    ZStack{
+                        HStack (spacing: 0){
+                            Text(item.name)
+                                .font(.RCallout)
+                            
+                            Spacer()
+                            Text("\(item.unitPrice) 원")
+                                .font(.RBody)
                         }
-
-                        Text("10:08")
+                        Text("\(item.quantity)개")
                             .font(.RCaption2)
                             .foregroundColor(.rDarkGray)
+                            .padding(.leading, 80)
                     }
-                    .padding(.vertical,2)
+                    
+                    Text("10:08")
+                        .font(.RCaption2)
+                        .foregroundColor(.rDarkGray)
                 }
+                .padding(.vertical,2)
             }
+        }
         
         .listStyle(.plain)
-
+        
     }
+    
+    @ViewBuilder
     private var editListView: some View{
-        return 
-//        List {
-                ForEach($shoppingViewModel.shoppingItem, id: \.id){ $item in
-                    VStack(alignment:.leading, spacing: 0){
-                        ZStack{
-                            HStack (spacing: 0){
-                                TextField("", text: $item.name)
-                                    .font(.RCallout)
-                                    .frame(width: 190)
-                                    .onChange(of: text) { newValue in
-                                        if newValue.count > 10 {
-                                            text = String(newValue.prefix(13))
-                                        }
+        List {
+            ForEach($shoppingViewModel.shoppingItem, id: \.id){ $item in
+                VStack(alignment:.leading, spacing: 0){
+                    ZStack{
+                        HStack (spacing: 0){
+                            TextField("", text: $item.name)
+                                .font(.RCallout)
+                                .frame(width: 190)
+                                .onChange(of: text) { newValue in
+                                    if newValue.count > 10 {
+                                        text = String(newValue.prefix(13))
                                     }
-                                Spacer()
-                                Text("\(item.unitPrice) 원")
-                                    .font(.RBody)
-                            }
-                            Text("\(item.quantity)개")
-                                .font(.RCaption2)
-                                .foregroundColor(.rDarkGray)
-                                .padding(.leading, 80)
-                            HStack(spacing: 13){
-                                Button{
-                                    item.quantity -= 1
-                                } label: {
-                                    Image(systemName: "minus")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 7)
                                 }
-                                Button{
-                                    item.quantity += 1
-                                    print("\(item.quantity) 증가")
-                                } label: {
-                                    Image(systemName: "plus")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 7)
-                                }
-                            }
-                            .background(Image("capsule")
-                            )
-                            .padding(.leading, 150)
+                            Spacer()
+                            Text("\(item.unitPrice) 원")
+                                .font(.RBody)
                         }
-
-                        Text("10:08")
+                        Text("\(item.quantity)개")
                             .font(.RCaption2)
                             .foregroundColor(.rDarkGray)
+                            .padding(.leading, 80)
+                        HStack(spacing: 13){
+                            Button {
+                                item.quantity -= 1
+                            } label: {
+                                Image(systemName: "minus")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 7)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            
+                            Button{
+                                item.quantity += 1
+                            } label: {
+                                Image(systemName: "plus")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 7)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                        .background(Image("capsule")
+                        )
+                        .padding(.leading, 150)
                     }
-                    .padding(.vertical,2)
-                }.onDelete(perform: removeList)
-//            }
-//        .listStyle(.plain)
-
+                    
+                    Text("10:08")
+                        .font(.RCaption2)
+                        .foregroundColor(.rDarkGray)
+                }
+                .padding(.vertical,2)
+            }
+            .onDelete(perform: removeList)
+        }
+        .listStyle(.plain)
+        
     }
     func removeList(at offsets: IndexSet) {
         shoppingViewModel.shoppingItem.remove(atOffsets: offsets)
-        }
+    }
 }
 
 #Preview {
