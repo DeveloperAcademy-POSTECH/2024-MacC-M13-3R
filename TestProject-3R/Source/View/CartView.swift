@@ -150,6 +150,7 @@ struct CartView: View {
         }
     }
     
+    @ViewBuilder
     private var progressbar: some View{
         let progressBarHeight: CGFloat = 24.0
         
@@ -163,6 +164,8 @@ struct CartView: View {
                 .padding(5)
         }
     }
+    
+    @ViewBuilder
     private var indicator: some View {
         return
         ZStack{
@@ -174,6 +177,8 @@ struct CartView: View {
                 .font(.system(size: 15))
         }
     }
+    
+    @ViewBuilder
     private var indicatorText: some View {
         return ZStack{
             Image("polygon")
@@ -185,6 +190,8 @@ struct CartView: View {
                 .padding(.bottom,4)
         }
     }
+    
+    @ViewBuilder
     private var voiceRecodingButton: some View{
         return ZStack{
             if isRecoding{
@@ -229,6 +236,7 @@ struct CartView: View {
         }
     }
     
+    @ViewBuilder
     private var listView: some View{
         return List {
             ForEach(shoppingViewModel.shoppingItem, id: \.self){ item in
@@ -283,30 +291,31 @@ struct CartView: View {
                             .font(.RCaption2)
                             .foregroundColor(.rDarkGray)
                             .padding(.leading, 80)
-                        HStack(spacing: 13){
-                            Button {
-                                item.quantity -= 1
-                            } label: {
-                                Image(systemName: "minus")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 7)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                            
-                            Button{
-                                item.quantity += 1
-                            } label: {
-                                Image(systemName: "plus")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 7)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                        }
-                        .background(Image("capsule")
-                        )
-                        .padding(.leading, 150)
+                        
+                        
+//                        HStack(spacing: 13){
+//                            Button {
+//                                item.quantity -= 1
+//                            } label: {
+//                                Image(systemName: "minus")
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(width: 7)
+//                            }
+//                            .buttonStyle(PlainButtonStyle())
+//                            
+//                            Button{
+//                                item.quantity += 1
+//                            } label: {
+//                                Image(systemName: "plus")
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(width: 7)
+//                            }
+//                            .buttonStyle(PlainButtonStyle())
+//                        }
+//                        .background(Image("capsule"))
+//                        .padding(.leading, 150)
                     }
                     
                     Text("10:08")
