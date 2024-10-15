@@ -11,6 +11,7 @@
 		305F25EF2CA274F300D101A3 /* GPT in Frameworks */ = {isa = PBXBuildFile; productRef = 305F25EE2CA274F300D101A3 /* GPT */; };
 		305F25F12CA274F300D101A3 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 305F25F02CA274F300D101A3 /* OpenAI */; };
 		305F26002CB363E500D101A3 /* UpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F25FF2CB363E500D101A3 /* UpdateView.swift */; };
+		305F26042CB9237600D101A3 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F26032CB9237600D101A3 /* LocationManager.swift */; };
 		715DCCD82CAFD87A00E899A5 /* UserDefaultsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715DCCD72CAFD87A00E899A5 /* UserDefaultsTestView.swift */; };
 		7164D99D2CA3A8E800598405 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */; };
 		7168CC762CB57EFC00A01E28 /* ParcingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7168CC752CB57EFC00A01E28 /* ParcingModel.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		305F25F42CA38DC700D101A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		305F25FF2CB363E500D101A3 /* UpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateView.swift; sourceTree = "<group>"; };
+		305F26032CB9237600D101A3 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		715DCCD72CAFD87A00E899A5 /* UserDefaultsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDefaultsTestView.swift; path = ../Source/ViewModel/UserDefaultsTestView.swift; sourceTree = "<group>"; };
 		7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		7168CC742CB56EF800A01E28 /* API_KEY.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = API_KEY.xcconfig; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */,
+				305F26032CB9237600D101A3 /* LocationManager.swift */,
 				7168CC752CB57EFC00A01E28 /* ParcingModel.swift */,
 				718C1EA62CBCFB3500FC5651 /* ProgressViewModel.swift */,
 			);
@@ -297,6 +300,7 @@
 				718C1E6B2CBC2E9400FC5651 /* FontExtension.swift in Sources */,
 				715DCCD82CAFD87A00E899A5 /* UserDefaultsTestView.swift in Sources */,
 				71D966CC2CA26C5F00D971C6 /* SttView.swift in Sources */,
+				305F26042CB9237600D101A3 /* LocationManager.swift in Sources */,
 				7168CC7A2CB59ED100A01E28 /* ParcingView.swift in Sources */,
 				7164D99D2CA3A8E800598405 /* SpeechRecognizer.swift in Sources */,
 				718C1E362CB5A08300FC5651 /* BudgetView.swift in Sources */,
@@ -436,12 +440,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestProject-3R/Preview Content\"";
-				DEVELOPMENT_TEAM = R83JF9K5WA;
+				DEVELOPMENT_TEAM = 7P4U6S44RJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "TestProject-3R/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = 1.0;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -471,12 +476,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestProject-3R/Preview Content\"";
-				DEVELOPMENT_TEAM = R83JF9K5WA;
+				DEVELOPMENT_TEAM = 7P4U6S44RJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "TestProject-3R/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = 1.0;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
