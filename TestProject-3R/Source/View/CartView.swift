@@ -1,14 +1,11 @@
 import SwiftUI
 
 struct CartView: View {
-    @StateObject private var shoppingViewModel = ShoppingViewModel()
+    @ObservedObject var shoppingViewModel: ShoppingViewModel
     
     @State private var isEdit: Bool = true  //수정버튼
-    @State private var place: String = "이마트 포항이동점"
     
-    @State private var budget: Int = 50000  //초기 예산
-    @State private var remaining: Int = 0   //남은돈
-    @State private var price: Int = 0       //현재까지 담은 가격
+    @State private var price: Int = 50000      //현재까지 담은 가격
     
     @State private var percent: CGFloat = 0.4 //프로그래스바 퍼센트
     @State private var percentText: String = "이제 아껴볼까요?"
@@ -26,10 +23,11 @@ struct CartView: View {
     let fullWidth: CGFloat
     let progressBarWidth: CGFloat
     
-    init(size: CGSize) {
+    init(size: CGSize, shoppingViewModel: ShoppingViewModel) {
         self.size = size
         self.fullWidth = size.width
-        self.progressBarWidth = size.width * 0.8
+        self.progressBarWidth = size.width * 0.77
+        self.shoppingViewModel = shoppingViewModel
     }
     
     var body: some View {
@@ -37,7 +35,7 @@ struct CartView: View {
             VStack(spacing: 0){
                 HStack(spacing: 0){
                     VStack(alignment: .leading, spacing: 0){
-                        Text("이마트 포항이동점")
+                        Text(shoppingViewModel.nowPlace)
                             .font(.RHeadline)
                             .padding(.top, 36)
                         Text("\(price) 원")
@@ -46,7 +44,7 @@ struct CartView: View {
                         HStack(spacing: 0){
                             Text("예산까지 ")
                                 .font(.RBody)
-                            Text("\(remaining) 원")
+                            Text("\((shoppingViewModel.nowBudget ?? 50000)-price) 원")
                                 .font(.RCallout)
                                 .foregroundColor(.rOrange)
                             Text(" 남았어요!")
@@ -59,14 +57,15 @@ struct CartView: View {
                     progressbar
                         .padding(.top, 24)
                     VStack(alignment: .center){
-                        indicatorText
+//                        indicatorText
                         indicator
-                    }.padding(.leading, (progressBarWidth * percent)-CGFloat(percentText.count/2)*10)
+                    }
+                    .padding(.leading, progressBarWidth * percent-10)
                 }.padding(.top, 13)
                 
                 HStack(spacing: 0){
                     Spacer()
-                    Text("\(budget)")
+                    Text("\(shoppingViewModel.nowBudget ?? 50000)")
                         .font(.RCaption1)
                         .foregroundColor(.rDarkGray)
                         .padding(.top,4)
@@ -124,6 +123,9 @@ struct CartView: View {
                 
             }
             .navigationTitle("장바구니")
+            .onAppear{
+                updatePercent()
+            }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -154,20 +156,19 @@ struct CartView: View {
     private var progressbar: some View{
         let progressBarHeight: CGFloat = 24.0
         
-        return  ZStack(alignment: .leading) {
+        ZStack(alignment: .leading) {
             Capsule()
-                .frame(width: progressBarWidth, height: progressBarHeight, alignment: .leading)
+                .frame(width: progressBarWidth+10, height: progressBarHeight, alignment: .leading)
                 .foregroundColor(.rLightGreen)
             Capsule()
-                .frame(width: (progressBarWidth * percent) , height: progressBarHeight-6, alignment: .leading)
-                .foregroundColor(Color.yellow)
-                .padding(5)
+                .frame(width: progressBarWidth * percent , height: progressBarHeight-6, alignment: .leading)
+                .foregroundColor(percentColor)
+                .padding(.horizontal,5)
         }
     }
     
     @ViewBuilder
     private var indicator: some View {
-        return
         ZStack{
             Circle()
                 .frame(width: 18)
@@ -180,7 +181,7 @@ struct CartView: View {
     
     @ViewBuilder
     private var indicatorText: some View {
-        return ZStack{
+        ZStack{
             Image("polygon")
                 .resizable()
                 .scaledToFit()
@@ -193,7 +194,7 @@ struct CartView: View {
     
     @ViewBuilder
     private var voiceRecodingButton: some View{
-        return ZStack{
+        ZStack{
             if isRecoding{
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(.rDarkGreen)
@@ -238,7 +239,7 @@ struct CartView: View {
     
     @ViewBuilder
     private var listView: some View{
-        return List {
+        List {
             ForEach(shoppingViewModel.shoppingItem, id: \.self){ item in
                 VStack(alignment:.leading, spacing: 0){
                     ZStack{
@@ -293,29 +294,29 @@ struct CartView: View {
                             .padding(.leading, 80)
                         
                         
-//                        HStack(spacing: 13){
-//                            Button {
-//                                item.quantity -= 1
-//                            } label: {
-//                                Image(systemName: "minus")
-//                                    .resizable()
-//                                    .scaledToFit()
-//                                    .frame(width: 7)
-//                            }
-//                            .buttonStyle(PlainButtonStyle())
-//                            
-//                            Button{
-//                                item.quantity += 1
-//                            } label: {
-//                                Image(systemName: "plus")
-//                                    .resizable()
-//                                    .scaledToFit()
-//                                    .frame(width: 7)
-//                            }
-//                            .buttonStyle(PlainButtonStyle())
-//                        }
-//                        .background(Image("capsule"))
-//                        .padding(.leading, 150)
+                        HStack(spacing: 13){
+                            Button {
+                                item.quantity -= 1
+                            } label: {
+                                Image(systemName: "minus")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 7)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            
+                            Button{
+                                item.quantity += 1
+                            } label: {
+                                Image(systemName: "plus")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 7)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                        .background(Image("capsule"))
+                        .padding(.leading, 150)
                     }
                     
                     Text("10:08")
@@ -332,8 +333,26 @@ struct CartView: View {
     func removeList(at offsets: IndexSet) {
         shoppingViewModel.shoppingItem.remove(atOffsets: offsets)
     }
+    func updatePercent() {
+        let budget = CGFloat(shoppingViewModel.nowBudget ?? 50000)
+        percent = (CGFloat(price) / budget)
+        
+        if percent<=0.33 {
+            percentColor = Color.rYellow
+        }
+        else if 0.33<percent && percent<=0.66 {
+            percentColor = Color.rOrange
+        }
+        else {
+            percentColor = Color.rRed
+        }
+        print("percent= ", percent)
+        print("progressBarWidth= ", progressBarWidth)
+        print("(progressBarWidth * percent)= ",(progressBarWidth * percent))
+        print("progressBarWidth * percent-10 =", progressBarWidth * percent-10 )
+    }
 }
 
 #Preview {
-    CartView(size: CGSize(width: 450, height: 50))
+    CartView(size: CGSize(width: 450, height: 50), shoppingViewModel: ShoppingViewModel())
 }

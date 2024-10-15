@@ -25,22 +25,8 @@ class ShoppingViewModel:ObservableObject {
     @Published var selectedDateItem: DateItem?
     
     
-    @Published var budget: Int? // 예산
-//    @State private var isEdit: Bool = true  //수정버튼
-//    @State private var place: String = "이마트 포항이동점"
-//    
-//    @State private var budget: Int = 50000  //초기 예산
-//    @State private var remaining: Int = 0   //남은돈
-//    @State private var price: Int = 0       //현재까지 담은 가격
-//    
-//    @State private var percent: CGFloat = 0.4 //프로그래스바 퍼센트
-//    @State private var percentText: String = "이제 아껴볼까요?"
-//    @State private var percentColor: Color = Color.rYellow
-//    
-//    @State private var isSort: Bool = false    //정렬버튼
-//    @State private var isRefresh: Bool = false //새로고침버튼
-//    @State private var updateTime: Int = 8     //새로고침시간
-//    @State private var isRecoding: Bool = true //음성인식버튼
+    @Published var nowBudget: Int? // 예산
+    @Published var nowPlace: String = "장소 안정함"
     
     init(){
         loadShoppingListFromUserDefaults()
@@ -111,3 +97,4 @@ class ShoppingViewModel:ObservableObject {
         return formatter.string(from: date)
     }
 }
+

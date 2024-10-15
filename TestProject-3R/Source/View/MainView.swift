@@ -1,10 +1,3 @@
-//
-//  MainView.swift
-//  TestProject-3R
-//
-//  Created by 임이지 on 10/8/24.
-//
-
 import SwiftUI
 
 struct MainView: View {
@@ -53,7 +46,7 @@ struct MainView: View {
                 .background(.rWhite)
                 .cornerRadius(8)
                 .padding(.bottom, 16)
-                NavigationLink(destination: BudgetView()) {
+                NavigationLink(destination: BudgetView(shoppingViewModel: shoppingViewModel)) {
                     Text("장보러 가기")
                         .font(.RHeadline)
                         .foregroundColor(.rWhite)

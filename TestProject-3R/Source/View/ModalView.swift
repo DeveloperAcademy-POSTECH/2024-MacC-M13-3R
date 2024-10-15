@@ -1,10 +1,3 @@
-//
-//  ModalView.swift
-//  TestProject-3R
-//
-//  Created by 임이지 on 10/14/24.
-//
-
 import SwiftUI
 
 struct ModalView: View {
