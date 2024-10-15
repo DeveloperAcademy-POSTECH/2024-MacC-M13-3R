@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
+    @StateObject private var shoppingViewModel = ShoppingViewModel()
     @State var showSheet: Bool = false
     
     var body: some View {
@@ -22,7 +23,7 @@ struct MainView: View {
             .padding(.bottom, 8)
             VStack {
                 VStack (alignment: .leading) {
-                    Text("2024.10.06")
+                    Text(shoppingViewModel.formatDate(from: Date()))
                         .font(.RHeadline)
                         .padding(.top, 32)
                         .padding(.bottom, 20)
@@ -47,6 +48,7 @@ struct MainView: View {
                     
                     ProgressViewModel()
                 }
+                .padding(.bottom, 32)
                 .padding(.horizontal, 24)
                 .background(.rWhite)
                 .cornerRadius(8)
@@ -76,14 +78,15 @@ struct MainView: View {
                 .padding(.horizontal, 8)
                 ScrollView(.horizontal) {
                     HStack {
-                        ForEach(0..<7) { index in
+                        ForEach(shoppingViewModel.dateItem.suffix(7), id: \.self) { item in
                             Button {
+                                shoppingViewModel.selectedDateItem = item
                                 showSheet.toggle()
                             } label: {
                                 VStack(alignment: .leading, spacing: -1){
                                     HStack(alignment:.center
                                     ){
-                                        Text("34,500 원")
+                                        Text("\(item.total) 원")
                                             .font(.RCallout)
                                             .padding(.trailing, 35)
                                         Spacer()
@@ -99,9 +102,10 @@ struct MainView: View {
                                         RoundedCorner(radius: 9, corners: [.topLeft, .topRight])
                                     )
                                     VStack(alignment: .leading) {
-                                        Text("2024.10.04")
+                                        Text(
+                                            shoppingViewModel.formatDate(from: item.date))
                                             .font(.RCaption1)
-                                        Text("이마트 포항이동점")
+                                        Text(item.place)
                                             .font(.RCaption2)
                                     }
                                     .padding(.vertical, 8)
@@ -122,7 +126,7 @@ struct MainView: View {
                             }
                             .buttonStyle(PlainButtonStyle())
                             .sheet(isPresented: $showSheet) {
-                                ModalView()
+                                ModalView(shoppingViewModel: shoppingViewModel)
                                     .presentationDetents([.medium])
                                     .presentationDragIndicator(.visible)
                             }
@@ -189,7 +193,7 @@ struct MainView: View {
                 
                 Spacer()
             }
-            .padding(.vertical,32)
+            .padding(.top,32)
             .padding(.horizontal, 16)
             .background(Color("RSuperLightGray"))
             
