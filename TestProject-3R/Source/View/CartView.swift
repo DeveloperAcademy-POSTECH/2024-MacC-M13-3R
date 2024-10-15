@@ -3,7 +3,7 @@ import SwiftUI
 struct CartView: View {
     @StateObject private var shoppingViewModel = ShoppingViewModel()
     
-    @State private var isEdit: Bool = false  //수정버튼
+    @State private var isEdit: Bool = true  //수정버튼
     @State private var place: String = "이마트 포항이동점"
     
     @State private var budget: Int = 50000  //초기 예산
@@ -16,7 +16,11 @@ struct CartView: View {
     
     @State private var isSort: Bool = false    //정렬버튼
     @State private var isRefresh: Bool = false //새로고침버튼
+    @State private var updateTime: Int = 8     //새로고침시간
     @State private var isRecoding: Bool = true //음성인식버튼
+    
+    
+    @State private var text = ""
     
     let size: CGSize
     let fullWidth: CGFloat
@@ -51,7 +55,6 @@ struct CartView: View {
                     }
                     Spacer()
                 }.padding(.horizontal)
-                
                 ZStack(alignment: .leading){
                     progressbar
                         .padding(.top, 24)
@@ -75,10 +78,10 @@ struct CartView: View {
                         .frame(height: 36)
                     HStack(spacing: 0){
                         Button{
-                            
+                            isSort.toggle()
                         } label: {
                             HStack(spacing: 3){
-                                Text("정렬")
+                                Text(isSort ? "정렬눌림": "정렬")
                                 Image(systemName: "chevron.down")
                                     .resizable()
                                     .scaledToFit()
@@ -91,11 +94,10 @@ struct CartView: View {
                         Spacer()
                         
                         Button{
-                            
+                            isRefresh.toggle()
                         } label: {
                             HStack(spacing: 0){
-                                Text("8")
-                                Text("분 전 ")
+                                Text(isRefresh ? "새로고침 눌림": "\(updateTime)분 전  ")
                                 Image(systemName: "arrow.circlepath")
                                     .resizable()
                                     .scaledToFit()
@@ -106,8 +108,12 @@ struct CartView: View {
                         }
                     }.padding(.horizontal)
                 }
-                
-                listView
+                if isEdit {
+                    editListView
+                }
+                else {
+                    listView
+                }
                 
                 Button{
                     isRecoding.toggle()
@@ -122,12 +128,13 @@ struct CartView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        print("수정중")
+                        isEdit.toggle()
                     }) {
-                        Text("수정하기")
+                        Text(isEdit ? "수정완료": "수정하기")
                             .font(.RBody)
                             .foregroundColor(.rDarkGreen)
                     }
+                    
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -230,21 +237,20 @@ struct CartView: View {
                             HStack (spacing: 0){
                                 Text(item.name)
                                     .font(.RCallout)
+                                
                                 Spacer()
                                 Text("\(item.unitPrice) 원")
                                     .font(.RBody)
                             }
                             Text("\(item.quantity)개")
-                                .font(.RCaption1)
+                                .font(.RCaption2)
                                 .foregroundColor(.rDarkGray)
-                            //caption2 로 바꿔야함!!!!!!!!
-                                .padding(.leading, 100)
+                                .padding(.leading, 80)
                         }
 
                         Text("10:08")
-                            .font(.RCaption1)
+                            .font(.RCaption2)
                             .foregroundColor(.rDarkGray)
-                        //caption2 로 바꿔야함!!!!!!!!
                     }
                     .padding(.vertical,2)
                 }
@@ -253,6 +259,66 @@ struct CartView: View {
         .listStyle(.plain)
 
     }
+    private var editListView: some View{
+        return 
+//        List {
+                ForEach($shoppingViewModel.shoppingItem, id: \.id){ $item in
+                    VStack(alignment:.leading, spacing: 0){
+                        ZStack{
+                            HStack (spacing: 0){
+                                TextField("", text: $item.name)
+                                    .font(.RCallout)
+                                    .frame(width: 190)
+                                    .onChange(of: text) { newValue in
+                                        if newValue.count > 10 {
+                                            text = String(newValue.prefix(13))
+                                        }
+                                    }
+                                Spacer()
+                                Text("\(item.unitPrice) 원")
+                                    .font(.RBody)
+                            }
+                            Text("\(item.quantity)개")
+                                .font(.RCaption2)
+                                .foregroundColor(.rDarkGray)
+                                .padding(.leading, 80)
+                            HStack(spacing: 13){
+                                Button{
+                                    item.quantity -= 1
+                                } label: {
+                                    Image(systemName: "minus")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 7)
+                                }
+                                Button{
+                                    item.quantity += 1
+                                    print("\(item.quantity) 증가")
+                                } label: {
+                                    Image(systemName: "plus")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 7)
+                                }
+                            }
+                            .background(Image("capsule")
+                            )
+                            .padding(.leading, 150)
+                        }
+
+                        Text("10:08")
+                            .font(.RCaption2)
+                            .foregroundColor(.rDarkGray)
+                    }
+                    .padding(.vertical,2)
+                }.onDelete(perform: removeList)
+//            }
+//        .listStyle(.plain)
+
+    }
+    func removeList(at offsets: IndexSet) {
+        shoppingViewModel.shoppingItem.remove(atOffsets: offsets)
+        }
 }
 
 #Preview {
