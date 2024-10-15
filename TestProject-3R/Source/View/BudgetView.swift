@@ -122,7 +122,7 @@ struct BudgetView: View {
                 .navigationBarTitleDisplayMode(.inline)
             }.padding(.horizontal, 16)
                 .tint(.green)
-                .onAppear(){
+//                .onAppear(){
                     //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
                     //            let yourLongitudeString = String(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")
                     //            self.latitude = (Double(yourLatitudeString) ?? 0)
@@ -138,10 +138,10 @@ struct BudgetView: View {
                     //                    print("Unable to fetch location information.")
                     //                }
                     //            }
-                }
+//                }
         }
             .tint(.green)
-            .onAppear(){
+//            .onAppear(){
                 //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
                 //            let yourLongitudeString = String(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")
                 //            self.latitude = (Double(yourLatitudeString) ?? 0)
@@ -157,7 +157,7 @@ struct BudgetView: View {
                 //                    print("Unable to fetch location information.")
                 //                }
                 //            }
-            }
+//            }
         }
         //    private func updateSliderValue() {
         //        if let newDoubleValue = Double(sliderValue) {

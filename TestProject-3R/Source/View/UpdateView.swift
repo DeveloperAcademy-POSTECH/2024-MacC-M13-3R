@@ -3,7 +3,6 @@ import ChatGPT
 
 struct UpdateView: View {
     let APIKey = Bundle.main.infoDictionary?["APIKey"] as! String
-    
     @ObservedObject var speechRecognizer: SpeechRecognizer
     @StateObject private var shoppingViewModel = ShoppingViewModel()
     
@@ -101,6 +100,7 @@ struct UpdateView: View {
             shoppingViewModel.loadShoppingListFromUserDefaults()
         }
         .onDisappear {
+            shoppingViewModel.saveShoppingListToUserDefaults()
             speechRecognizer.stopTranscribing()
             print("Not recording")
         }
@@ -113,7 +113,7 @@ struct UpdateView: View {
         do {
             let chatGPT = ChatGPT(apiKey: APIKey, defaultModel: .gpt3)
             let prompt =  """
-                        난 지금 마트에 장을 보러왔는데 이제부터 말을 할거야. 내가 카트에 담은 물건들의 각각의 목록, 개수, 가격을 보여주고, 총 가격도 계산해서 csv파일로 만들어줘.  가격들은 숫자로 써줘. 내가 아무말도 안했다면 '초콜릿 1000원짜리 5개'를 기본 입력해 csv파일 만들어줘. csv 형식은 "물건, 수량, 가격, 합계"로 보여줘. csv파일에 띄어쓰기는 빼줘. 파싱할거야. 다른 불필요한 말은 하지 않아도 돼.
+                        난 지금 마트에 장을 보러왔는데 이제부터 말을 할거야. 내가 카트에 담은 물건들의 각각의 목록, 개수, 가격을 보여주고, 총 가격도 계산해서 csv파일로 만들어줘.  가격들은 숫자로 써줘. 내가 아무말도 안했다면 '초콜릿 1000원짜리 5개'를 기본 입력해 csv파일 만들어줘. csv 형식은 "물건, 수량, 가격, 합계"로 보여줘. csv파일에 띄어쓰기는 무조건 삭제해서 올려줘. 파싱할거야. 다른 불필요한 말은 하지 않아도 돼.
                         사용자가 입력한 목록: \(speechRecognizer.transcript)
                         """
             let answer = try await chatGPT.ask(prompt)
@@ -139,7 +139,6 @@ struct UpdateView: View {
                         let totalPrice = shoppingViewModel.shoppingItem.reduce(0) { $0 + $1.price }
                         let dateItem = DateItem(date: shoppingViewModel.removeSeconds(from: Date()), items: shoppingViewModel.shoppingItem, total: totalPrice, place: "장소")
                         shoppingViewModel.dateItem.append(dateItem)
-                        
                         shoppingViewModel.saveShoppingListToUserDefaults()
                     }
                 }
