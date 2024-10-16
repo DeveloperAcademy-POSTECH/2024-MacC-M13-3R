@@ -383,7 +383,14 @@ struct CartView: View {
                 }
                 .padding(.vertical,2)
             }
-            .onDelete(perform: removeList)
+//            .onDelete(perform: removeList)
+            .swipeActions(edge: .trailing) {
+                Button(role: .destructive) {
+                } label: {
+                                Label("Delete", systemImage: "trash.fill")
+                            }
+                            .tint(.red)
+                        }
         }
         .listStyle(.plain)
         
