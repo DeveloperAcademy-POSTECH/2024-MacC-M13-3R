@@ -39,6 +39,7 @@
 		71D966CC2CA26C5F00D971C6 /* SttView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D966CB2CA26C5F00D971C6 /* SttView.swift */; };
 		71D966CE2CA26C6800D971C6 /* GptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D966CD2CA26C6800D971C6 /* GptView.swift */; };
 		71F30CA72CBE64EB00EA4EF4 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F30CA62CBE64EB00EA4EF4 /* ListViewModel.swift */; };
+		71F30CAB2CBF67F500EA4EF4 /* ReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F30CAA2CBF67F500EA4EF4 /* ReceiptView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		71D966CB2CA26C5F00D971C6 /* SttView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SttView.swift; sourceTree = "<group>"; };
 		71D966CD2CA26C6800D971C6 /* GptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GptView.swift; sourceTree = "<group>"; };
 		71F30CA62CBE64EB00EA4EF4 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		71F30CAA2CBF67F500EA4EF4 /* ReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 				718C1E352CB5A08300FC5651 /* BudgetView.swift */,
 				718C1E372CB76A6800FC5651 /* CartView.swift */,
 				718C1EBD2CBD371D00FC5651 /* ModalView.swift */,
+				71F30CAA2CBF67F500EA4EF4 /* ReceiptView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				71D966CE2CA26C6800D971C6 /* GptView.swift in Sources */,
 				7168CC762CB57EFC00A01E28 /* ParcingModel.swift in Sources */,
 				718C1E6B2CBC2E9400FC5651 /* FontExtension.swift in Sources */,
+				71F30CAB2CBF67F500EA4EF4 /* ReceiptView.swift in Sources */,
 				715DCCD82CAFD87A00E899A5 /* UserDefaultsTestView.swift in Sources */,
 				71D966CC2CA26C5F00D971C6 /* SttView.swift in Sources */,
 				305F26042CB9237600D101A3 /* LocationManager.swift in Sources */,

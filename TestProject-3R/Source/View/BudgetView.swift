@@ -5,16 +5,13 @@ struct BudgetView: View {
     @ObservedObject var shoppingViewModel: ShoppingViewModel
     
     @State var sliderValue = 0.0
-    @State private var inputPlaceValue = ""
-    //    @State var inputValue = "50000"
     @State var showSheet1 = false
-    @FocusState private var isTextFieldFocused: Bool
     //    @State private var locationDataManager = LocationManager()
     @State private var latitude: Double = 0
     @State private var longitude: Double = 0
     @State private var cityN: String = ""
     @State  private var countryC: String = ""
-    
+    @State private var isCartViewActive = false
     
     var body: some View {
         NavigationStack {
@@ -88,7 +85,7 @@ struct BudgetView: View {
                 }
                 .padding(.bottom, 2)
                 HStack {
-                    TextField("이마트 포항이동점", text: $inputPlaceValue)
+                    TextField("이마트 포항이동점", text: $shoppingViewModel.nowPlace)
                         .font(.RHeadline)
                         .font(.system(size: 16, weight: .medium))
                         .frame(width: 500)
@@ -116,6 +113,8 @@ struct BudgetView: View {
                         .cornerRadius(15)
                         .padding(.bottom, 32)
                 }
+
+                
                 
                 .navigationTitle("장보기 준비하기")
                 .navigationBarTitleDisplayMode(.inline)
@@ -185,29 +184,25 @@ struct BudgetModalView: View {
                     .font(.RMain)
                     .keyboardType(.decimalPad)
                     .font(.system(size: 16, weight: .medium))
-                //                    .onSubmit {
-                //                        if let newValue = Double(inputValue){
-                //                            sliderValue = newValue
-                //                        }
-                //                        showSheet = false
-                //                    }
                     .frame(width: 150)
                     .multilineTextAlignment(.center)
                 Text("원")
                     .font(.system(size: 20, weight: .medium))
             }
             Spacer()
-            Button("입력") {
+            Button{
                 if let newValue = Double(inputValue){
                     sliderValue = newValue
                 }
                 showSheet = false
+            } label: {
+                Text("입력")
+                    .foregroundColor(.white)
+                    .font(.RHeadline)
+                    .frame(width: 361, height: 52)
+                    .background(.rDarkGreen)
+                    .cornerRadius(15)
             }
-            .foregroundColor(.white)
-            .font(.RHeadline)
-            .frame(width: 361, height: 52)
-            .background(.rDarkGreen)
-            .cornerRadius(15)
             .padding(.bottom, 32)
         }
         .onAppear {

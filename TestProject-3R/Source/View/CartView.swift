@@ -27,7 +27,7 @@ struct CartView: View {
     
     @State private var text = ""
     
-    @State private var isMainViewActive = false  // MainView로 이동을 관리하는 상태 변수
+    @State private var isFinish = false  // MainView로 이동을 관리하는 상태 변수
     
     let size: CGSize
     let fullWidth: CGFloat
@@ -173,7 +173,7 @@ struct CartView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        isMainViewActive = true
+                        isFinish = true
                         isEdit = false
                         isSort = false
                         isRefresh = false
@@ -189,7 +189,7 @@ struct CartView: View {
                 }
             }
             
-            NavigationLink(destination: MainView(), isActive: $isMainViewActive) {
+            NavigationLink(destination: ReceiptView(shoppingViewModel: shoppingViewModel), isActive: $isFinish) {
                 EmptyView()
             }
 
@@ -458,10 +458,9 @@ struct CartView: View {
                     shoppingViewModel.pricing(from: shoppingViewModel.shoppingItem)
                     // MARK: total 계산
                     let totalPrice = shoppingViewModel.totalPricing(from: shoppingViewModel.shoppingItem)
-                    let dateItem = DateItem(date: shoppingViewModel.removeSeconds(from: Date()), items: shoppingViewModel.shoppingItem, total: totalPrice, place: "장소")
+                    let dateItem = DateItem(date: shoppingViewModel.removeSeconds(from: Date()), items: shoppingViewModel.shoppingItem, total: totalPrice, place: shoppingViewModel.nowPlace)
                     
                     shoppingViewModel.dateItem.append(dateItem)
-                    
                     price = totalPrice
                     updatePercent()
                 }

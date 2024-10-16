@@ -26,7 +26,7 @@ class ShoppingViewModel:ObservableObject {
     
     
     @Published var nowBudget: Int? // 예산
-    @Published var nowPlace: String = "장소 안정함"
+    @Published var nowPlace: String = ""
     
     init(){
         loadShoppingListFromUserDefaults()
@@ -117,7 +117,6 @@ class ShoppingViewModel:ObservableObject {
             }
         }
     }
-
 }
 
 

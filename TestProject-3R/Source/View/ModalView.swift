@@ -6,7 +6,7 @@ struct ModalView: View {
     var body: some View {
         VStack (alignment: .leading) {
             HStack {
-                Text(shoppingViewModel.formatDate(from: shoppingViewModel.selectedDateItem?.date ?? shoppingViewModel.dateItem[0].date))
+                Text(shoppingViewModel.formatDate(from: shoppingViewModel.selectedDateItem?.date ?? Date()))
                     .font(.RTitle)
                 Spacer()
             }
@@ -22,7 +22,7 @@ struct ModalView: View {
                 .padding(.bottom,8)
             
             HStack {
-                Text(shoppingViewModel.selectedDateItem?.place ?? "장소아무거나")
+                Text(shoppingViewModel.selectedDateItem?.place ?? "장소")
                     .font(.RCallout)
                 Spacer()
             }
