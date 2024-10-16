@@ -6,7 +6,7 @@ struct ModalView: View {
     var body: some View {
         VStack (alignment: .leading) {
             HStack {
-                Text(shoppingViewModel.formatDate(from: shoppingViewModel.selectedDateItem?.date ?? shoppingViewModel.dateItem[0].date))
+                Text(shoppingViewModel.formatDate(from: shoppingViewModel.selectedDateItem?.date ?? Date()))
                     .font(.RTitle)
                 Spacer()
             }
@@ -22,7 +22,7 @@ struct ModalView: View {
                 .padding(.bottom,8)
             
             HStack {
-                Text(shoppingViewModel.selectedDateItem?.place ?? "장소아무거나")
+                Text(shoppingViewModel.selectedDateItem?.place ?? "장소")
                     .font(.RCallout)
                 Spacer()
             }
@@ -56,7 +56,7 @@ struct ModalView: View {
                                     Text(item.name)
                                         .font(.RCaption1)
                                         .foregroundColor(.rDarkGray)
-                                        .frame(width: 118, alignment: .trailing)
+                                        .frame(width: 118, alignment: .leading)
                                         .padding(.bottom, 8)
                                     Text("\(item.quantity)")
                                         .font(.RCaption1)
@@ -84,7 +84,7 @@ struct ModalView: View {
                     .padding(.bottom, 12)
                     
                     HStack {
-                        Text("카드")
+                        Text("총계")
                             .font(.RCallout)
                         Spacer()
                         Text("\(shoppingViewModel.selectedDateItem?.total ?? 10000)")
