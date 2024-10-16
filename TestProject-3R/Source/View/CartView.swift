@@ -8,8 +8,7 @@ struct CartView: View {
     @ObservedObject var shoppingViewModel: ShoppingViewModel
     @StateObject private var speechRecognizer = SpeechRecognizer()
     
-    @State private var isEdit: Bool = true  //수정버튼
-    
+    @State private var isEdit: Bool = false  //수정버튼
     @State private var price: Int = 0      //현재까지 담은 가격
     
     @State private var percent: CGFloat = 0.4 //프로그래스바 퍼센트
@@ -395,24 +394,23 @@ struct CartView: View {
                         .foregroundColor(.rDarkGray)
                 }
                 .padding(.vertical,2)
-            }
-//            .onDelete(perform: removeList)
-            //다시 커밋
-            .swipeActions(edge: .trailing) {
-                Button(role: .destructive) {
-                } label: {
-                                Label("Delete", systemImage: "trash.fill")
-                            }
-                            .tint(.red)
+                .swipeActions(edge: .trailing) {
+                    Button(role: .destructive) {
+                        if let index = shoppingViewModel.shoppingItem.firstIndex(where: { $0.id == item.id }) {
+                            removeList(at: IndexSet(integer: index))
                         }
+                    } label: {
+                        Label("Delete", systemImage: "trash.fill")
+                    }
+                    .tint(.red)
+                }
+            }
         }
         .listStyle(.plain)
         
     }
     func removeList(at offsets: IndexSet) {
-        print("삭제할 인덱스: \(offsets)")
         shoppingViewModel.shoppingItem.remove(atOffsets: offsets)
-        print("남은 항목: \(shoppingViewModel.shoppingItem)")
     }
     func updatePercent() {
         let budget = CGFloat(shoppingViewModel.nowBudget ?? 50000)
@@ -501,16 +499,9 @@ struct CartView: View {
                     else {
                         if var lastDateItem = shoppingViewModel.dateItem.last {
                             for newItem in shoppingViewModel.shoppingItem {
-                                    if let existingIndex = lastDateItem.items.firstIndex(where: { $0.id == newItem.id }) {
-                                        // 기존 항목이 있으면 수량만 업데이트
-                                        lastDateItem.items[existingIndex].quantity += newItem.quantity
-                                        lastDateItem.items[existingIndex].price += newItem.price
-                                    } else {
-                                        // 기존 항목이 없으면 새 항목 추가
-                                        lastDateItem.items.append(newItem)
-                                    }
+                                lastDateItem.items.append(newItem)
                                 }
-                            lastDateItem.total = shoppingViewModel.totalPricing(from: lastDateItem.items) // 총 가격 업데이트
+                            lastDateItem.total = shoppingViewModel.totalPricing(from: lastDateItem.items)
                             
                             if let lastIndex = shoppingViewModel.dateItem.indices.last {
                                 shoppingViewModel.dateItem[lastIndex] = lastDateItem
