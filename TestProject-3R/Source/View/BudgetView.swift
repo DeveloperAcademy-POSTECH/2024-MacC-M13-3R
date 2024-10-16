@@ -209,18 +209,20 @@ struct BudgetModalView: View {
                     .font(.system(size: 20, weight: .medium))
             }
             Spacer()
-            Button("입력") {
+            Button {
                 if let newValue = Double(inputValue){
                     sliderValue = newValue
                 }
                 showSheet = false
+            } label: {
+                Text("입력")
+                    .foregroundColor(.white)
+                    .font(.RHeadline)
+                    .frame(width: 361, height: 52)
+                    .background(.rDarkGreen)
+                    .cornerRadius(15)
+                    .padding(.bottom, 32)
             }
-            .foregroundColor(.white)
-            .font(.RHeadline)
-            .frame(width: 361, height: 52)
-            .background(.rDarkGreen)
-            .cornerRadius(15)
-            .padding(.bottom, 32)
         }
         .onAppear {
             inputValue = "\(Int(sliderValue))"
