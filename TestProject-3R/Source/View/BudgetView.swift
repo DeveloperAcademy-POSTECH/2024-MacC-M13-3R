@@ -1,7 +1,6 @@
 import SwiftUI
-
-
 struct BudgetView: View {
+    @Environment (\.dismiss) var dismiss
     @ObservedObject var shoppingViewModel: ShoppingViewModel
     
     @State var sliderValue = 0.0
@@ -118,8 +117,21 @@ struct BudgetView: View {
                 }
                 
                 .navigationTitle("장보기 준비하기")
+                .navigationBarBackButtonHidden()
+//                .navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+
                 .navigationBarTitleDisplayMode(.inline)
-            }.padding(.horizontal, 16)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            dismiss()
+                        }) {
+                            Image(systemName: "chevron.left")
+                        }
+                    }
+                }
+            }
+            .padding(.horizontal, 16)
                 .tint(.green)
             //                .onAppear(){
             //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")

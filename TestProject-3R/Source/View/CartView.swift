@@ -4,6 +4,7 @@ import ChatGPT
 struct CartView: View {
     let APIKey = Bundle.main.infoDictionary?["APIKey"] as! String
     
+    @Environment(\.dismiss) var dismiss
     @ObservedObject var shoppingViewModel: ShoppingViewModel
     @StateObject private var speechRecognizer = SpeechRecognizer()
     
@@ -163,6 +164,14 @@ struct CartView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
                         isEdit.toggle()
                         shoppingViewModel.saveShoppingListToUserDefaults()
                     }) {
@@ -194,7 +203,7 @@ struct CartView: View {
                 EmptyView()  // 버튼과 같이 보이지 않는 뷰
             }
 
-        }
+        }.navigationBarBackButtonHidden()
     }
     
     @ViewBuilder
