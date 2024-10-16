@@ -17,6 +17,7 @@ struct ShoppingItem: Identifiable, Codable, Hashable {
     var quantity: Int
     var unitPrice: Int //단가
     var price: Int //수량*단가
+    var time: Date
 }
 
 class ShoppingViewModel:ObservableObject {
@@ -67,6 +68,13 @@ class ShoppingViewModel:ObservableObject {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy.MM.dd"
         return formatter.string(from: date)
+    }
+    // MARK: 현재 시간 출력
+    func formatDateToHHMM(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        let formattedTime = formatter.string(from: date)
+        return formattedTime
     }
     
     // MARK: 총 금액 계산

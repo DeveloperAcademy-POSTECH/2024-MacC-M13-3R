@@ -322,8 +322,7 @@ struct CartView: View {
                             .foregroundColor(.rDarkGray)
                             .padding(.leading, 80)
                     }
-                    
-                    Text("10:08")
+                    Text(shoppingViewModel.formatDateToHHMM(from: item.time))
                         .font(.RCaption2)
                         .foregroundColor(.rDarkGray)
                 }
@@ -474,18 +473,19 @@ struct CartView: View {
                                 let quantity = Int(item[1]) ?? 0
                                 let unitPrice = Int(item[2]) ?? 0
                                 let price = quantity * unitPrice
+                                let time = Date()
                                 
-                                return ShoppingItem(name: name, quantity: quantity, unitPrice: unitPrice, price: price)
+                                return ShoppingItem(name: name, quantity: quantity, unitPrice: unitPrice, price: price, time: time)
                             } else {
                                 return nil
                             }
                         }
                     
                     shoppingViewModel.shoppingItem.append(contentsOf: newItems)
-                    shoppingViewModel.pricing(from: shoppingViewModel.shoppingItem)
                     
                     // MARK: total 계산
                     let totalPrice = shoppingViewModel.totalPricing(from: shoppingViewModel.shoppingItem)
+                    
                     if !isFirstRefresh{
                         let dateItem = DateItem(
                             date: shoppingViewModel.removeSeconds(from: Date()),

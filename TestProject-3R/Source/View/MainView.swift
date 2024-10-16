@@ -17,7 +17,6 @@ struct MainView: View {
             .padding(.top, 33)
             .padding(.bottom, 8)
             VStack {
-                // 오늘 금액
                 VStack (alignment: .leading) {
                     Text(shoppingViewModel.formatDate(from: Date()))
                         .font(.RHeadline)
@@ -50,7 +49,7 @@ struct MainView: View {
                 .cornerRadius(8)
                 .padding(.bottom, 16)
                 
-                //버튼
+                // MARK: 버튼
                 NavigationLink(destination: BudgetView(shoppingViewModel: shoppingViewModel)) {
                     Text("장보러 가기")
                         .font(.RHeadline)
@@ -62,7 +61,7 @@ struct MainView: View {
                 }
                 .padding(.bottom, 32)
                 
-                //영수증
+                // MARK: 영수증
                 VStack(alignment: .leading) {
                     HStack(alignment: .center, spacing: 4) {
                         Text("나의 영수증")
