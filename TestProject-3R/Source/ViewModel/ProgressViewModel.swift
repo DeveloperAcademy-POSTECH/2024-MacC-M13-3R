@@ -40,16 +40,12 @@ struct ProgressViewModel: View {
                                 .stroke(Color("RGrayGreen"), lineWidth: 2) // 테두리 색상 및 두께 설정
                             )
 
-                        Rectangle()
-                            .fill(LinearGradient(gradient: Gradient(colors: gradientColors),
-                                                 startPoint: .leading,
-                                                 endPoint: .trailing))
-                            .frame(width: geometry.size.width * progress, height: 19)
-                            .cornerRadius(10)
-                            .animation(.easeInOut, value: savedAmount)
-                            .padding(3)
-                            
-                
+                    Rectangle()
+                        .fill(LinearGradient(gradient: Gradient(colors:gradientColors), startPoint: .leading, endPoint: .trailing))
+                        .frame(width: geometry.size.width * progress, height: 19)
+                        .cornerRadius(10)
+                        .animation(.easeInOut, value: savedAmount)
+                        .padding(3)
             }
         }
     }
