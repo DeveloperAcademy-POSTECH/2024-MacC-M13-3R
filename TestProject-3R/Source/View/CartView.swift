@@ -384,6 +384,7 @@ struct CartView: View {
                 .padding(.vertical,2)
             }
 //            .onDelete(perform: removeList)
+            //다시 커밋
             .swipeActions(edge: .trailing) {
                 Button(role: .destructive) {
                 } label: {
