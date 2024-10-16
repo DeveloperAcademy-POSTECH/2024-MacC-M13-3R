@@ -56,7 +56,7 @@ struct ModalView: View {
                                     Text(item.name)
                                         .font(.RCaption1)
                                         .foregroundColor(.rDarkGray)
-                                        .frame(width: 118, alignment: .trailing)
+                                        .frame(width: 118, alignment: .leading)
                                         .padding(.bottom, 8)
                                     Text("\(item.quantity)")
                                         .font(.RCaption1)
@@ -84,7 +84,7 @@ struct ModalView: View {
                     .padding(.bottom, 12)
                     
                     HStack {
-                        Text("카드")
+                        Text("총계")
                             .font(.RCallout)
                         Spacer()
                         Text("\(shoppingViewModel.selectedDateItem?.total ?? 10000)")
