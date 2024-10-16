@@ -28,7 +28,7 @@ struct CartView: View {
     
     @State private var text = ""
     
-    @State private var isMainViewActive = false  // MainView로 이동을 관리하는 상태 변수
+    @State private var isFinish = false  // MainView로 이동을 관리하는 상태 변수
     
     let size: CGSize
     let fullWidth: CGFloat
@@ -173,7 +173,6 @@ struct CartView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         isEdit.toggle()
-                        shoppingViewModel.saveShoppingListToUserDefaults()
                     }) {
                         Text(isEdit ? "수정완료": "수정하기")
                             .font(.RBody)
@@ -183,12 +182,13 @@ struct CartView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        shoppingViewModel.saveShoppingListToUserDefaults()
-                        isMainViewActive = true
+                        isFinish = true
                         isEdit = false
                         isSort = false
                         isRefresh = false
                         isRecoding = false
+                        
+                        shoppingViewModel.saveShoppingListToUserDefaults()
                     }) {
                         Text("종료")
                             .font(.RBody)
@@ -198,9 +198,8 @@ struct CartView: View {
                 }
             }
             
-            // NavigationLink 추가
-            NavigationLink(destination: MainView(), isActive: $isMainViewActive) {
-                EmptyView()  // 버튼과 같이 보이지 않는 뷰
+            NavigationLink(destination: ReceiptView(shoppingViewModel: shoppingViewModel), isActive: $isFinish) {
+                EmptyView()
             }
 
         }.navigationBarBackButtonHidden()
@@ -399,7 +398,6 @@ struct CartView: View {
     func removeList(at offsets: IndexSet) {
         print("삭제할 인덱스: \(offsets)")
         shoppingViewModel.shoppingItem.remove(atOffsets: offsets)
-        shoppingViewModel.saveShoppingListToUserDefaults()
         print("남은 항목: \(shoppingViewModel.shoppingItem)")
     }
     func updatePercent() {
@@ -477,12 +475,11 @@ struct CartView: View {
                     shoppingViewModel.pricing(from: shoppingViewModel.shoppingItem)
                     // MARK: total 계산
                     let totalPrice = shoppingViewModel.totalPricing(from: shoppingViewModel.shoppingItem)
-                    let dateItem = DateItem(date: shoppingViewModel.removeSeconds(from: Date()), items: shoppingViewModel.shoppingItem, total: totalPrice, place: "장소")
-                    shoppingViewModel.dateItem.append(dateItem)
+                    let dateItem = DateItem(date: shoppingViewModel.removeSeconds(from: Date()), items: shoppingViewModel.shoppingItem, total: totalPrice, place: shoppingViewModel.nowPlace)
                     
+                    shoppingViewModel.dateItem.append(dateItem)
                     price = totalPrice
                     updatePercent()
-                    shoppingViewModel.saveShoppingListToUserDefaults()
                 }
             }
         }
