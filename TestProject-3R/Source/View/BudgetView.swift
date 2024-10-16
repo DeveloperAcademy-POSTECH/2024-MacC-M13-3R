@@ -202,7 +202,6 @@ struct BudgetModalView: View {
                     .font(.system(size: 20, weight: .medium))
             }
             Spacer()
-            Button {
             Button{
                 if let newValue = Double(inputValue){
                     sliderValue = newValue
@@ -216,7 +215,6 @@ struct BudgetModalView: View {
                     .background(.rDarkGreen)
                     .cornerRadius(15)
                     .padding(.bottom, 32)
-            }
             }
             .padding(.bottom, 32)
         }
