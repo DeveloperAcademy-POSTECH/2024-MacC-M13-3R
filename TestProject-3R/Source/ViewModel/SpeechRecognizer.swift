@@ -7,7 +7,7 @@ class SpeechRecognizer: NSObject, ObservableObject, SFSpeechRecognizerDelegate {
     
     @Published var transcript = ""
     private var isTranscribing = false
-    @Published var sttText = "무러바"
+    @Published var sttText = ""
     
     override init() {
         super.init()
@@ -64,6 +64,7 @@ class SpeechRecognizer: NSObject, ObservableObject, SFSpeechRecognizerDelegate {
         }
         do {
             try audioEngine.start()
+            print("Recording")
         } catch {
             print("오디오 엔진 시작 실패: \(error)")
             cleanup()
@@ -73,6 +74,7 @@ class SpeechRecognizer: NSObject, ObservableObject, SFSpeechRecognizerDelegate {
     func stopTranscribing(){
         recognitionTask?.cancel()
         sttText = transcript
+        print("Not recording")
         cleanup()
     }
     
