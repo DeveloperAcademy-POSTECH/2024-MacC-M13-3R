@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		300B2EAF2CBFD84800323DE4 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B2EAE2CBFD84800323DE4 /* HistoryView.swift */; };
+		300B2EB22CC1043600323DE4 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 300B2EB12CC1043600323DE4 /* Lottie */; };
+		300B2EB42CC105F300323DE4 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B2EB32CC105F300323DE4 /* LottieView.swift */; };
 		305F25ED2CA274F300D101A3 /* ChatGPT in Frameworks */ = {isa = PBXBuildFile; productRef = 305F25EC2CA274F300D101A3 /* ChatGPT */; };
 		305F25EF2CA274F300D101A3 /* GPT in Frameworks */ = {isa = PBXBuildFile; productRef = 305F25EE2CA274F300D101A3 /* GPT */; };
 		305F25F12CA274F300D101A3 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 305F25F02CA274F300D101A3 /* OpenAI */; };
@@ -46,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		300B2EAE2CBFD84800323DE4 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		300B2EB32CC105F300323DE4 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		305F25F42CA38DC700D101A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		305F25FF2CB363E500D101A3 /* UpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateView.swift; sourceTree = "<group>"; };
 		305F26032CB9237600D101A3 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -90,6 +93,7 @@
 				305F25EF2CA274F300D101A3 /* GPT in Frameworks */,
 				305F25F12CA274F300D101A3 /* OpenAI in Frameworks */,
 				305F25ED2CA274F300D101A3 /* ChatGPT in Frameworks */,
+				300B2EB22CC1043600323DE4 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				7164D99C2CA3A8E800598405 /* SpeechRecognizer.swift */,
+				300B2EB32CC105F300323DE4 /* LottieView.swift */,
 				305F26032CB9237600D101A3 /* LocationManager.swift */,
 				7168CC752CB57EFC00A01E28 /* ParcingModel.swift */,
 				71F30CA62CBE64EB00EA4EF4 /* ListViewModel.swift */,
@@ -229,6 +234,7 @@
 				305F25EC2CA274F300D101A3 /* ChatGPT */,
 				305F25EE2CA274F300D101A3 /* GPT */,
 				305F25F02CA274F300D101A3 /* OpenAI */,
+				300B2EB12CC1043600323DE4 /* Lottie */,
 			);
 			productName = "TestProject-3R";
 			productReference = 71D966B62CA26C1700D971C6 /* TestProject-3R.app */;
@@ -260,6 +266,7 @@
 			mainGroup = 71D966AD2CA26C1700D971C6;
 			packageReferences = (
 				305F25EB2CA274F300D101A3 /* XCRemoteSwiftPackageReference "GPTSwift" */,
+				300B2EB02CC1043600323DE4 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 71D966B72CA26C1700D971C6 /* Products */;
 			projectDirPath = "";
@@ -305,6 +312,7 @@
 				71D966BA2CA26C1700D971C6 /* TestProject_3RApp.swift in Sources */,
 				71D966CE2CA26C6800D971C6 /* GptView.swift in Sources */,
 				7168CC762CB57EFC00A01E28 /* ParcingModel.swift in Sources */,
+				300B2EB42CC105F300323DE4 /* LottieView.swift in Sources */,
 				718C1E6B2CBC2E9400FC5651 /* FontExtension.swift in Sources */,
 				71F30CAB2CBF67F500EA4EF4 /* ReceiptView.swift in Sources */,
 				715DCCD82CAFD87A00E899A5 /* UserDefaultsTestView.swift in Sources */,
@@ -452,7 +460,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestProject-3R/Preview Content\"";
-				DEVELOPMENT_TEAM = R83JF9K5WA;
+				DEVELOPMENT_TEAM = 7P4U6S44RJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "TestProject-3R/Info.plist";
@@ -488,7 +496,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestProject-3R/Preview Content\"";
-				DEVELOPMENT_TEAM = R83JF9K5WA;
+				DEVELOPMENT_TEAM = 7P4U6S44RJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "TestProject-3R/Info.plist";
@@ -540,6 +548,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		300B2EB02CC1043600323DE4 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 		305F25EB2CA274F300D101A3 /* XCRemoteSwiftPackageReference "GPTSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftedMind/GPTSwift";
@@ -551,6 +567,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		300B2EB12CC1043600323DE4 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 300B2EB02CC1043600323DE4 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		305F25EC2CA274F300D101A3 /* ChatGPT */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 305F25EB2CA274F300D101A3 /* XCRemoteSwiftPackageReference "GPTSwift" */;

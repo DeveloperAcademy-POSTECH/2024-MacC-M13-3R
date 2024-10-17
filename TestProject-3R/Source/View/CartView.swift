@@ -258,10 +258,8 @@ struct CartView: View {
                     .frame(height: 60)
                 VStack{
                     HStack{
-                        Image("voiceRecordingLottie")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 39)
+                        LottieView(jsonName: "voiceRecordingLottie1", play: true)
+                            .frame(width: 120, height: 100)
                         Text("음성인식중입니다")
                             .font(.RHeadline)
                     }
