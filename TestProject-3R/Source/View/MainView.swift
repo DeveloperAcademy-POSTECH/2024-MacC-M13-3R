@@ -67,12 +67,14 @@ struct MainView: View {
                         Text("나의 영수증")
                             .font(.RHeadline)
                         Spacer()
-                        Text("더보기")
-                            .font(.RCaption1)
-                            .foregroundColor(.rDarkGray)
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.rDarkGray)
-                            .font(.system(size: 10))
+                        NavigationLink (destination: HistoryView(shoppingViewModel: ShoppingViewModel())) {
+                            Text("더보기")
+                                .font(.RCaption1)
+                                .foregroundColor(.rDarkGray)
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.rDarkGray)
+                                .font(.system(size: 10))
+                        }
                     }
                     ScrollView(.horizontal) {
                         HStack {
@@ -203,9 +205,7 @@ struct MainView: View {
             .onAppear{
                 shoppingViewModel.loadShoppingListFromUserDefaults()
             }
-            
         }
-        .navigationBarBackButtonHidden(true)
         .tint(Color("RDarkGreen"))
     }
 }
