@@ -112,14 +112,9 @@ struct BudgetView: View {
                         .cornerRadius(15)
                         .padding(.bottom, 32)
                 }
-
-                
-                
                 .navigationTitle("장보기 준비하기")
-                .navigationBarBackButtonHidden()
-//                .navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-
                 .navigationBarTitleDisplayMode(.inline)
+                .navigationBarBackButtonHidden()
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button(action: {
@@ -220,10 +215,8 @@ struct BudgetModalView: View {
         }
         .onAppear {
             inputValue = "\(Int(sliderValue))"
-            
         }
     }
-    
 }
 
 

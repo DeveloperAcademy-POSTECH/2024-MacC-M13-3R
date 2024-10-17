@@ -4,7 +4,6 @@ import ChatGPT
 struct CartView: View {
     let APIKey = Bundle.main.infoDictionary?["APIKey"] as! String
     
-    @Environment(\.dismiss) var dismiss
     @ObservedObject var shoppingViewModel: ShoppingViewModel
     @StateObject private var speechRecognizer = SpeechRecognizer()
     
@@ -170,21 +169,12 @@ struct CartView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "chevron.left")
-                    }
-                }
-                
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
                         isEdit.toggle()
                     }) {
                         Text(isEdit ? "수정완료": "수정하기")
                             .font(.RBody)
                             .foregroundColor(.rDarkGreen)
                     }
-                    
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
