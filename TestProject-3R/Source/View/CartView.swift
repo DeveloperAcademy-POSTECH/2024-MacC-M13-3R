@@ -2,12 +2,12 @@ import SwiftUI
 import ChatGPT
 
 struct CartView: View {
+    @Environment(\.dismiss) var dismiss
     let APIKey = Bundle.main.infoDictionary?["APIKey"] as! String
     
     @ObservedObject var shoppingViewModel: ShoppingViewModel
     @StateObject private var speechRecognizer = SpeechRecognizer()
     
-    @State private var isEdit: Bool = false  //수정버튼
     @State private var price: Int = 0      //현재까지 담은 가격
     
     @State private var percent: CGFloat = 0.4 //프로그래스바 퍼센트
@@ -28,7 +28,7 @@ struct CartView: View {
     @State private var text = ""
     
     @State private var isFinish = false  // MainView로 이동을 관리하는 상태 변수
-    
+    @State private var isAlert = false
     let size: CGSize
     let fullWidth: CGFloat
     let progressBarWidth: CGFloat
@@ -127,13 +127,8 @@ struct CartView: View {
                         }
                     }.padding(.horizontal)
                 }
-                if isEdit {
-                    editListView
-                }
-                else {
-                    listView
-                }
-                
+                    
+                editListView
                 Button{
                     isRecoding.toggle()
                     
@@ -169,29 +164,14 @@ struct CartView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        isEdit.toggle()
+                        dismiss()
                     }) {
-                        Text(isEdit ? "수정완료": "수정하기")
-                            .font(.RBody)
-                            .foregroundColor(.rDarkGreen)
+                        Image(systemName: "chevron.left")
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        Task {
-                            await sendMessage()
-                            if let lastDateItem = shoppingViewModel.dateItem.last, !lastDateItem.items.isEmpty {
-                                DispatchQueue.main.async {
-                                    shoppingViewModel.saveShoppingListToUserDefaults()
-                                    isFinish = true
-                                    isEdit = false
-                                    isSort = false
-                                    isRecoding = false
-                                }
-                            } else {
-                                print("내용이 없음")
-                            }
-                        }
+                        isAlert = true
                     }) {
                         Text("종료")
                             .font(.RBody)
@@ -200,7 +180,26 @@ struct CartView: View {
                     }
                 }
             }
-            
+            .alert(isPresented: $isAlert){
+                Alert(title: Text("장보기를 종료하시겠습니까?"),
+                      message: Text("다시는 이 화면으로 돌아오지 못합니다."),
+                      primaryButton: .destructive(Text("종료하기"), action: {
+                    isFinish=true
+                    Task {
+                        await sendMessage()
+                        if let lastDateItem = shoppingViewModel.dateItem.last, !lastDateItem.items.isEmpty {
+                            DispatchQueue.main.async {
+                                shoppingViewModel.saveShoppingListToUserDefaults()
+                                isSort = false
+                                isRecoding = false
+                            }
+                        } else {
+                            print("내용이 없음")
+                        }
+                    }
+                }),
+                      secondaryButton: .cancel(Text("돌아가기")))
+            }
             NavigationLink(destination: ReceiptView(shoppingViewModel: shoppingViewModel), isActive: $isFinish) {
                 EmptyView()
             }
@@ -294,38 +293,6 @@ struct CartView: View {
     }
     
     @ViewBuilder
-    private var listView: some View{
-        List {
-            ForEach(shoppingViewModel.shoppingItem, id: \.self){ item in
-                VStack(alignment:.leading, spacing: 0){
-                    ZStack{
-                        HStack (spacing: 0){
-                            Text(item.name)
-                                .font(.RCallout)
-                            
-                            Spacer()
-                            Text("\(item.unitPrice) 원")
-                                .font(.RBody)
-                        }
-                        Text("\(item.quantity)개")
-                            .font(.RCaption2)
-                            .foregroundColor(.rDarkGray)
-                            .padding(.leading, 80)
-                    }
-                    
-                    Text("10:08")
-                        .font(.RCaption2)
-                        .foregroundColor(.rDarkGray)
-                }
-                .padding(.vertical,2)
-            }
-        }
-        
-        .listStyle(.plain)
-        
-    }
-    
-    @ViewBuilder
     private var editListView: some View{
         List {
             ForEach($shoppingViewModel.shoppingItem, id: \.id){ $item in
@@ -378,8 +345,7 @@ struct CartView: View {
                         .background(Image("capsule"))
                         .padding(.leading, 150)
                     }
-                    
-                    Text("10:08")
+                    Text(shoppingViewModel.formatDateToHHMM(from: item.time))
                         .font(.RCaption2)
                         .foregroundColor(.rDarkGray)
                 }
@@ -401,6 +367,9 @@ struct CartView: View {
     }
     func removeList(at offsets: IndexSet) {
         shoppingViewModel.shoppingItem.remove(atOffsets: offsets)
+        let totalPrice = shoppingViewModel.totalPricing(from: shoppingViewModel.shoppingItem)
+        price = totalPrice
+        updatePercent()
     }
     func updatePercent() {
         let budget = CGFloat(shoppingViewModel.nowBudget ?? 50000)
@@ -464,18 +433,19 @@ struct CartView: View {
                                 let quantity = Int(item[1]) ?? 0
                                 let unitPrice = Int(item[2]) ?? 0
                                 let price = quantity * unitPrice
+                                let time = Date()
                                 
-                                return ShoppingItem(name: name, quantity: quantity, unitPrice: unitPrice, price: price)
+                                return ShoppingItem(name: name, quantity: quantity, unitPrice: unitPrice, price: price, time: time)
                             } else {
                                 return nil
                             }
                         }
                     
                     shoppingViewModel.shoppingItem.append(contentsOf: newItems)
-                    shoppingViewModel.pricing(from: shoppingViewModel.shoppingItem)
                     
                     // MARK: total 계산
                     let totalPrice = shoppingViewModel.totalPricing(from: shoppingViewModel.shoppingItem)
+                    
                     if !isFirstRefresh{
                         let dateItem = DateItem(
                             date: shoppingViewModel.removeSeconds(from: Date()),
@@ -491,8 +461,6 @@ struct CartView: View {
                             for newItem in shoppingViewModel.shoppingItem {
                                 lastDateItem.items.append(newItem)
                                 }
-                            lastDateItem.total = shoppingViewModel.totalPricing(from: lastDateItem.items)
-                            
                             if let lastIndex = shoppingViewModel.dateItem.indices.last {
                                 shoppingViewModel.dateItem[lastIndex] = lastDateItem
                             }
