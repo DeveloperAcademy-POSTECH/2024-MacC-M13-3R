@@ -8,20 +8,23 @@
 import SwiftUI
 
 struct HistoryView: View {
+    @Environment (\.dismiss) var dismiss
     @ObservedObject var shoppingViewModel: ShoppingViewModel
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(shoppingViewModel.dateItem.reversed(), id: \.self) { item in
-                    HStack (spacing: 0){
-                        Text(shoppingViewModel.formatDate(from: item.date))
-//                        Text(shoppingViewModel.formatDate(from: shoppingViewModel.dateItem.last?.date ?? Date()))
-                            .font(.RBody)
-                        Spacer()
-                        Text("\(shoppingViewModel.dateItem.last?.total ?? 10000)")
-//                        Text(shoppingViewModel.selectedDateItem.total)
-                    }
+                    NavigationLink {
+                        ModalView(shoppingViewModel: ShoppingViewModel())
+                    } label: {
+                        HStack (spacing: 0){
+                            Text(shoppingViewModel.formatDate(from: item.date))
+                            Spacer()
+                            Text("\(item.total)")
+                        }
+                    }.font(.RBody)
+                    
                 }
             }
             .swipeActions(edge: .trailing) {
@@ -31,9 +34,9 @@ struct HistoryView: View {
                 }
                 .tint(.red)
             }
+            .navigationTitle("영수증 관리")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .listStyle(.plain)
-        .navigationTitle("영수증 관리")
     }
 }
 
