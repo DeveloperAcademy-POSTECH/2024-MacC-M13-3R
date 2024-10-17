@@ -115,7 +115,7 @@ struct ReceiptView: View {
                 EmptyView()
             }
 
-        }
+        }.navigationBarBackButtonHidden()
        
     }
 }

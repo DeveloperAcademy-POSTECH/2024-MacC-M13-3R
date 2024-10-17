@@ -94,22 +94,15 @@ struct BudgetView: View {
                 .padding(.leading, 135)
                 .padding(.bottom, 20)
                 
-                //                Text("City : \(cityN)")
-                //                    .font(.system(size: 28, weight: .bold))
-                //                Text("Latitude : \(latitude)")
-                //                    .font(.system(size: 28, weight: .bold))
-                //                Text("Longitude : \(longitude)")
-                //                    .font(.system(size: 28, weight: .bold))
                 Image("sample_map")
                 
                 Spacer()
                 
                 NavigationLink(destination: CartView(size: CGSize(width: 450, height: 50), shoppingViewModel: shoppingViewModel), isActive: $isCartViewActive) {
-                        EmptyView() // 조건에 따라 자동 전환되므로 빈 뷰를 사용
+                        EmptyView()
                         }
                             
                         Button(action: {
-                                // 로딩 뷰를 표시하고 타이머 시작
                             isLoading = true
                                 startLoading()
                         }) {
@@ -141,54 +134,10 @@ struct BudgetView: View {
                             LoadingView(isLoading: $isLoading, isCartViewActive: $isCartViewActive)
                                 
                         }
-            //                .onAppear(){
-            //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
-            //            let yourLongitudeString = String(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")
-            //            self.latitude = (Double(yourLatitudeString) ?? 0)
-            //            self.longitude =  (Double(yourLongitudeString) ?? 0)
-            //            // city and country
-            //            let locationInfo = LocationInfo()
-            //            locationInfo.getCityLocation(latitude: self.latitude, longitude: self.longitude) { city, country in
-            //                if let city = city, let country = country {
-            //                    self.cityN = city
-            //                    self.countryC = country
-            //                    print("City: \(city), Country: \(country)")
-            //                } else {
-            //                    print("Unable to fetch location information.")
-            //                }
-            //            }
-            //                }
         }
         
         .tint(.green)
-        //            .onAppear(){
-        //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
-        //            let yourLongitudeString = String(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")
-        //            self.latitude = (Double(yourLatitudeString) ?? 0)
-        //            self.longitude =  (Double(yourLongitudeString) ?? 0)
-        //            // city and country
-        //            let locationInfo = LocationInfo()
-        //            locationInfo.getCityLocation(latitude: self.latitude, longitude: self.longitude) { city, country in
-        //                if let city = city, let country = country {
-        //                    self.cityN = city
-        //                    self.countryC = country
-        //                    print("City: \(city), Country: \(country)")
-        //                } else {
-        //                    print("Unable to fetch location information.")
-        //                }
-        //            }
-        //            }
     }
-    
-    //    private func updateSliderValue() {
-    //        if let newDoubleValue = Double(sliderValue) {
-    //            DispatchQueue.main.async{
-    //
-    //                sliderValue = newDoubleValue
-    //            }
-    //        }
-    //    }
-    
     private func startLoading() {
             // 로딩을 위한 추가 작업이 필요하면 여기에 추가 가능
         }
