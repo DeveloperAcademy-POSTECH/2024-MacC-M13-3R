@@ -32,6 +32,7 @@
 		718C1E6D2CBC31BD00FC5651 /* FontView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C1E6C2CBC31BD00FC5651 /* FontView.swift */; };
 		718C1EA72CBCFB3500FC5651 /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C1EA62CBCFB3500FC5651 /* ProgressViewModel.swift */; };
 		718C1EBE2CBD371D00FC5651 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C1EBD2CBD371D00FC5651 /* ModalView.swift */; };
+		718C1EC22CBFFED600FC5651 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C1EC12CBFFED600FC5651 /* LoadingView.swift */; };
 		71BAEF172CB57BDF00E436FF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BAEF162CB57BDF00E436FF /* MainView.swift */; };
 		71C133722CAFF31E003DCCCF /* UserDefaultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C133712CAFF31E003DCCCF /* UserDefaultsModel.swift */; };
 		71D966BA2CA26C1700D971C6 /* TestProject_3RApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D966B92CA26C1700D971C6 /* TestProject_3RApp.swift */; };
@@ -68,6 +69,7 @@
 		718C1E6C2CBC31BD00FC5651 /* FontView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontView.swift; sourceTree = "<group>"; };
 		718C1EA62CBCFB3500FC5651 /* ProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewModel.swift; sourceTree = "<group>"; };
 		718C1EBD2CBD371D00FC5651 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
+		718C1EC12CBFFED600FC5651 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		71BAEF162CB57BDF00E436FF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		71C133712CAFF31E003DCCCF /* UserDefaultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDefaultsModel.swift; path = ../Source/ViewModel/UserDefaultsModel.swift; sourceTree = "<group>"; };
 		71D966B62CA26C1700D971C6 /* TestProject-3R.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TestProject-3R.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +180,7 @@
 				718C1E372CB76A6800FC5651 /* CartView.swift */,
 				718C1EBD2CBD371D00FC5651 /* ModalView.swift */,
 				71F30CAA2CBF67F500EA4EF4 /* ReceiptView.swift */,
+				718C1EC12CBFFED600FC5651 /* LoadingView.swift */,
 				300B2EAE2CBFD84800323DE4 /* HistoryView.swift */,
 			);
 			path = View;
@@ -306,6 +309,7 @@
 				71F30CAB2CBF67F500EA4EF4 /* ReceiptView.swift in Sources */,
 				715DCCD82CAFD87A00E899A5 /* UserDefaultsTestView.swift in Sources */,
 				71D966CC2CA26C5F00D971C6 /* SttView.swift in Sources */,
+				718C1EC22CBFFED600FC5651 /* LoadingView.swift in Sources */,
 				305F26042CB9237600D101A3 /* LocationManager.swift in Sources */,
 				71F30CA72CBE64EB00EA4EF4 /* ListViewModel.swift in Sources */,
 				7168CC7A2CB59ED100A01E28 /* ParcingView.swift in Sources */,
