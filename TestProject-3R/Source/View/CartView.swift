@@ -4,12 +4,10 @@ import ChatGPT
 struct CartView: View {
     let APIKey = Bundle.main.infoDictionary?["APIKey"] as! String
     
-    @Environment(\.dismiss) var dismiss
     @ObservedObject var shoppingViewModel: ShoppingViewModel
     @StateObject private var speechRecognizer = SpeechRecognizer()
     
-    @State private var isEdit: Bool = true  //수정버튼
-    
+    @State private var isEdit: Bool = false  //수정버튼
     @State private var price: Int = 0      //현재까지 담은 가격
     
     @State private var percent: CGFloat = 0.4 //프로그래스바 퍼센트
@@ -17,7 +15,8 @@ struct CartView: View {
     @State private var percentColor: Color = Color.rYellow
     
     @State private var isSort: Bool = false    //정렬버튼
-    @State private var isRefresh: Bool = false //새로고침버튼
+    @State private var refreshText: String = "새로고침"
+    @State private var isFirstRefresh: Bool = false // 새로고침버튼 최초 눌렀는지 확인
     @State private var updateTime: Int = 8     //새로고침시간
     @State private var isRecoding: Bool = true //음성인식버튼
     
@@ -104,10 +103,20 @@ struct CartView: View {
                         Spacer()
                         
                         Button{
-                            isRefresh.toggle()
+                            if isRecoding {
+                                refreshText = "\(updateTime)분 전"
+                                speechRecognizer.stopTranscribing()
+                                Task {
+                                    await sendMessage()
+                                    speechRecognizer.startTranscribing()
+                                }
+                            }
+                            else {
+                                refreshText = "새로고침 할 내용이 없습니다."
+                            }
                         } label: {
                             HStack(spacing: 0){
-                                Text(isRefresh ? "새로고침 눌림": "\(updateTime)분 전  ")
+                                Text(refreshText)
                                 Image(systemName: "arrow.circlepath")
                                     .resizable()
                                     .scaledToFit()
@@ -127,20 +136,18 @@ struct CartView: View {
                 
                 Button{
                     isRecoding.toggle()
+                    
                     if isRecoding {
                         speechRecognizer.startTranscribing()
                     }
                     else {
                         speechRecognizer.stopTranscribing()
-                        print(speechRecognizer.sttText)
-                        
-                            Task {
-                                await sendMessage()
-                            }
+                        Task {
+                            await sendMessage()
+                        }
                     }
                 } label: {
                     voiceRecordingButton
-                    
                 }
                 
                 
@@ -150,12 +157,10 @@ struct CartView: View {
                 updatePercent()
                 
                 speechRecognizer.startTranscribing()
-                print("Recording")
                 shoppingViewModel.loadShoppingListFromUserDefaults()
             }
             .onDisappear {
                 speechRecognizer.stopTranscribing()
-                print("Not recording")
             }
             .onTapGesture {
                 updatePercent()
@@ -164,31 +169,29 @@ struct CartView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "chevron.left")
-                    }
-                }
-                
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
                         isEdit.toggle()
                     }) {
                         Text(isEdit ? "수정완료": "수정하기")
                             .font(.RBody)
                             .foregroundColor(.rDarkGreen)
                     }
-                    
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        isFinish = true
-                        isEdit = false
-                        isSort = false
-                        isRefresh = false
-                        isRecoding = false
-                        
-                        shoppingViewModel.saveShoppingListToUserDefaults()
+                        Task {
+                            await sendMessage()
+                            if let lastDateItem = shoppingViewModel.dateItem.last, !lastDateItem.items.isEmpty {
+                                DispatchQueue.main.async {
+                                    shoppingViewModel.saveShoppingListToUserDefaults()
+                                    isFinish = true
+                                    isEdit = false
+                                    isSort = false
+                                    isRecoding = false
+                                }
+                            } else {
+                                print("내용이 없음")
+                            }
+                        }
                     }) {
                         Text("종료")
                             .font(.RBody)
@@ -381,24 +384,23 @@ struct CartView: View {
                         .foregroundColor(.rDarkGray)
                 }
                 .padding(.vertical,2)
-            }
-//            .onDelete(perform: removeList)
-            //다시 커밋
-            .swipeActions(edge: .trailing) {
-                Button(role: .destructive) {
-                } label: {
-                                Label("Delete", systemImage: "trash.fill")
-                            }
-                            .tint(.red)
+                .swipeActions(edge: .trailing) {
+                    Button(role: .destructive) {
+                        if let index = shoppingViewModel.shoppingItem.firstIndex(where: { $0.id == item.id }) {
+                            removeList(at: IndexSet(integer: index))
                         }
+                    } label: {
+                        Label("Delete", systemImage: "trash.fill")
+                    }
+                    .tint(.red)
+                }
+            }
         }
         .listStyle(.plain)
         
     }
     func removeList(at offsets: IndexSet) {
-        print("삭제할 인덱스: \(offsets)")
         shoppingViewModel.shoppingItem.remove(atOffsets: offsets)
-        print("남은 항목: \(shoppingViewModel.shoppingItem)")
     }
     func updatePercent() {
         let budget = CGFloat(shoppingViewModel.nowBudget ?? 50000)
@@ -425,14 +427,15 @@ struct CartView: View {
                 let chatGPT = ChatGPT(apiKey: APIKey, defaultModel: .gpt3)
                 let prompt = """
                             난 지금 마트에 장을 보러왔는데, 카트에 담은 물건들의 목록을 입력할거야. 물건 이름, 개수, 가격을 CSV 형식으로 만들어줘. CSV 형식은 반드시 다음과 같은 순서로 구성돼야 해:
-                            1. "물건", "수량", "가격", "합계" 헤더가 포함돼야 해.
+                            1. "물건", "수량", "가격" 헤더가 포함돼야 해.
                             2. 각 항목은 쉼표(,)로 구분되어야 해.
                             3. 띄어쓰기 없이 값을 기록해줘.
                             4. 모든 가격과 수량은 숫자로만 표현하고, 불필요한 말은 하지 않아도 돼.
+                            5. 입력: 뒤에 아무말도 없으면 앞서 지시한 1번의 헤더만 csv형식으로 줘.
                             입력: \(speechRecognizer.transcript)
                             """
                 answer = try await chatGPT.ask(prompt)
-                print (answer)
+                print ("answer: ", answer, "\n")
                 // 응답의 형식을 검사
                 if validateCSVFormat(answer) {
                     isValidFormat = true
@@ -445,44 +448,65 @@ struct CartView: View {
             }
             
         }
-        answerText = answer
         csvContent = answer
         
         if let content = csvContent {
             csvFilePath = createCSV(from: content)
             if let path = csvFilePath {
-                print("CSV 파일이 생성되었습니다: \(path)")
-                
-                
+                print("CSV 파일이 생성되었습니다")
                 loadListFromCSV(at: path) { parsedData in
+                    
                     print("파싱된 데이터: \(parsedData)")
                     
-                    shoppingViewModel.shoppingItem = parsedData.compactMap{ item in
-                        if(item[0] != "물건"){
-                            let name = item[0]
-                            let quantity = Int(item[1]) ?? 0
-                            let unitPrice = Int(item[2]) ?? 0
-                            let price = Int(item[3]) ?? 0
-                            
-                            return ShoppingItem(name: name, quantity: quantity, unitPrice: unitPrice, price: price)
+                    let newItems = parsedData.compactMap { item in
+                            if(item[0] != "물건") {
+                                let name = item[0]
+                                let quantity = Int(item[1]) ?? 0
+                                let unitPrice = Int(item[2]) ?? 0
+                                let price = quantity * unitPrice
+                                
+                                return ShoppingItem(name: name, quantity: quantity, unitPrice: unitPrice, price: price)
+                            } else {
+                                return nil
+                            }
                         }
-                        else {
-                            return nil
-                        }
-                    }
                     
-                    
+                    shoppingViewModel.shoppingItem.append(contentsOf: newItems)
                     shoppingViewModel.pricing(from: shoppingViewModel.shoppingItem)
+                    
                     // MARK: total 계산
                     let totalPrice = shoppingViewModel.totalPricing(from: shoppingViewModel.shoppingItem)
-                    let dateItem = DateItem(date: shoppingViewModel.removeSeconds(from: Date()), items: shoppingViewModel.shoppingItem, total: totalPrice, place: shoppingViewModel.nowPlace)
-                    
-                    shoppingViewModel.dateItem.append(dateItem)
+                    if !isFirstRefresh{
+                        let dateItem = DateItem(
+                            date: shoppingViewModel.removeSeconds(from: Date()),
+                            items: shoppingViewModel.shoppingItem,
+                            total: totalPrice,
+                            place: shoppingViewModel.nowPlace)
+                        
+                        shoppingViewModel.dateItem.append(dateItem)
+                        isFirstRefresh = true
+                    }
+                    else {
+                        if var lastDateItem = shoppingViewModel.dateItem.last {
+                            for newItem in shoppingViewModel.shoppingItem {
+                                lastDateItem.items.append(newItem)
+                                }
+                            lastDateItem.total = shoppingViewModel.totalPricing(from: lastDateItem.items)
+                            
+                            if let lastIndex = shoppingViewModel.dateItem.indices.last {
+                                shoppingViewModel.dateItem[lastIndex] = lastDateItem
+                            }
+                        }
+                    }
                     price = totalPrice
                     updatePercent()
+                    print("shoppingViewModel.dateItem.last:",shoppingViewModel.dateItem.last)
                 }
             }
         }
+        print("******************************************************")
+        speechRecognizer.sttText = ""
+        speechRecognizer.transcript = ""
         isProcessing = false
     }
 }
