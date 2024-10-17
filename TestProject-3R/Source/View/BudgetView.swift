@@ -1,6 +1,6 @@
 import SwiftUI
 struct BudgetView: View {
-    @Environment (\.dismiss) var dismiss
+    @Environment(\.dismiss) var dismiss
     @ObservedObject var shoppingViewModel: ShoppingViewModel
     
     @State var sliderValue = 0.0
@@ -11,6 +11,8 @@ struct BudgetView: View {
     @State private var cityN: String = ""
     @State  private var countryC: String = ""
     @State private var isCartViewActive = false
+    
+    @State private var isLoading = false
     
     var body: some View {
         NavigationStack {
@@ -102,7 +104,15 @@ struct BudgetView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: CartView(size: CGSize(width: 450, height: 50), shoppingViewModel: shoppingViewModel)) {
+                NavigationLink(destination: CartView(size: CGSize(width: 450, height: 50), shoppingViewModel: shoppingViewModel), isActive: $isCartViewActive) {
+                        EmptyView() // 조건에 따라 자동 전환되므로 빈 뷰를 사용
+                        }
+                            
+                        Button(action: {
+                                // 로딩 뷰를 표시하고 타이머 시작
+                            isLoading = true
+                                startLoading()
+                        }) {
                     Text("장보기 시작하기")
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
@@ -132,6 +142,10 @@ struct BudgetView: View {
             }
             .padding(.horizontal, 16)
                 .tint(.green)
+                .sheet(isPresented: $isLoading) {
+                            LoadingView(isLoading: $isLoading, isCartViewActive: $isCartViewActive)
+                                
+                        }
             //                .onAppear(){
             //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
             //            let yourLongitudeString = String(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")
@@ -150,6 +164,7 @@ struct BudgetView: View {
             //            }
             //                }
         }
+        
         .tint(.green)
         //            .onAppear(){
         //            let yourLatitudeString = String(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")
@@ -169,6 +184,7 @@ struct BudgetView: View {
         //            }
         //            }
     }
+    
     //    private func updateSliderValue() {
     //        if let newDoubleValue = Double(sliderValue) {
     //            DispatchQueue.main.async{
@@ -177,7 +193,13 @@ struct BudgetView: View {
     //            }
     //        }
     //    }
+    
+    private func startLoading() {
+            // 로딩을 위한 추가 작업이 필요하면 여기에 추가 가능
+        }
 }
+
+
 
 struct BudgetModalView: View {
     @State private var inputValue = "50000"
@@ -202,7 +224,6 @@ struct BudgetModalView: View {
                     .font(.system(size: 20, weight: .medium))
             }
             Spacer()
-            Button {
             Button{
                 if let newValue = Double(inputValue){
                     sliderValue = newValue
@@ -216,7 +237,6 @@ struct BudgetModalView: View {
                     .background(.rDarkGreen)
                     .cornerRadius(15)
                     .padding(.bottom, 32)
-            }
             }
             .padding(.bottom, 32)
         }
