@@ -258,7 +258,7 @@ struct CartView: View {
                 VStack{
                     HStack{
                         LottieView(jsonName: "voiceRecordingLottie1", play: true)
-                            .frame(width: 120, height: 100)
+                            .frame(width: 50, height: 50)
                         Text("음성인식중입니다")
                             .font(.RHeadline)
                     }
